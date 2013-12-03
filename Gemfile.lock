@@ -355,7 +355,6 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 4.0.1)
   simple_form!
-  simplecov
   terminal-notifier-guard
   therubyracer
   turbolinks
