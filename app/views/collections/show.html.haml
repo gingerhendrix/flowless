@@ -1,0 +1,12 @@
+.page-header
+  = link_to collections_path, :class => 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  = link_to edit_collection_path(@collection), :class => 'btn btn-primary' do
+    %span.glyphicon.glyphicon-pencil
+    Edit
+  %h1 Show collection
+
+%dl.dl-horizontal
+  %dt Name:
+  %dd= @collection.name

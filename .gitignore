@@ -1,0 +1,21 @@
+*.gem
+*.rbc
+.zeus.*
+.bundle
+.config
+.rvmrc
+coverage
+InstalledFiles
+lib/bundler/man
+pkg
+rdoc
+spec/reports
+test/tmp
+test/version_tmp
+tmp
+log
+
+# YARD artifacts
+.yardoc
+_yardoc
+doc/
