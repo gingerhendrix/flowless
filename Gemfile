@@ -39,8 +39,8 @@ end
 group :test do
   gem "mongoid-rspec"
   gem "ffaker"
+  gem "simplecov", require: false
   gem "database_cleaner"
-  gem "codeclimate-test-reporter", require: false
 end
 
 #gem 'redcarpet'
