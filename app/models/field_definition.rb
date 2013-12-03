@@ -2,7 +2,7 @@ class FieldDefinition
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  embedded_in :workflow, class_name: 'Workflow', inverse_of: 'field_definitions'
+  embedded_in :flow, class_name: 'Flow', inverse_of: 'field_definitions'
 
   field :index, type: Integer
 
