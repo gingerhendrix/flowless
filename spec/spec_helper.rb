@@ -5,11 +5,6 @@ def zeus_running?
   File.exists? '.zeus.sock'
 end
 
-if !zeus_running?
-  require 'simplecov'
-  SimpleCov.start 'rails'
-end
-
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
