@@ -1,3 +1,6 @@
+require "codeclimate-test-reporter"
+CodeClimate::TestReporter.start
+
 def zeus_running?
   File.exists? '.zeus.sock'
 end
