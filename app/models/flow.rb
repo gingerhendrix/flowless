@@ -2,7 +2,7 @@ class Flow
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  embeds_many :field_definitions, class_name: 'FieldDefinition', inverse_of: 'item', store_as: "fdefs"
+  embeds_many :field_definitions, class_name: 'FieldDefinition', inverse_of: 'item'
 
   has_many    :items, class_name: 'Item', inverse_of: 'flow',  validate: false
 
