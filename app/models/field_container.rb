@@ -30,6 +30,14 @@ class FieldContainer
     field_type._type.gsub(/Type(?=::|$)/, "Value")
   end
 
+  # A bit of metra programming to create 4 news methods to ease the creation of new values
+  # using the proper FieldValue type (linked from the associated FieldType)
+  #
+  # Creating the 4 basic methods used to build or create an object.
+  #
+  # @note Added a little trick to "move" the bang to the end of the method when present
+  #
+  # @return new methods definition
   %w( new build create create! ).each do |action|
     bang = action.slice!('!')
     define_method("#{action}_value#{bang}") do |value, options={}|
