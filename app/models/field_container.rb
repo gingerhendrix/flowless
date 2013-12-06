@@ -30,17 +30,10 @@ class FieldContainer
     field_type._type.gsub(/Type(?=::|$)/, "Value")
   end
 
-  def create_value(value, options={})
-    field_values.create *field_values_parameters(value, options)
-  end
-
-  def create_value!(value, options={})
-    field_values.create! *field_values_parameters(value, options)
-  end
-
-  private
-
-    def field_values_parameters(value, options={})
-      [ options.merge(value: value), field_type_to_value.constantize ]
+  %w( new build create create! ).each do |action|
+    bang = action.slice!('!')
+    define_method("#{action}_value#{bang}") do |value, options={}|
+      field_values.send action, options.merge(value: value), field_type_to_value.constantize
     end
+  end
 end
