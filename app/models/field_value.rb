@@ -4,7 +4,7 @@ class FieldValue
 
   delegate :field_type_to_value, to: :field_container
 
-  VALUES = Fields::AVAILABLE.map{ |field| "FieldValue/#{field}_value".camelcase }
+  VALUES = AppConfig.fields.map{ |field| "FieldValue/#{field}_value".camelcase }
 
   embedded_in :field_container, class_name: 'FieldContainer', inverse_of: 'field_values'
 

@@ -2,7 +2,7 @@ class FieldType
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  TYPES = Fields::AVAILABLE.map{ |field| "FieldType/#{field}_type".camelcase }
+  TYPES = AppConfig.fields.map{ |field| "FieldType/#{field}_type".camelcase }
 
   embedded_in :flow, class_name: 'Flow', inverse_of: 'field_types'
 

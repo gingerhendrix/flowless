@@ -41,7 +41,6 @@ module User::AuthDefinitions
     ## Token authenticatable
     # field :auth_token, :type => String
 
-    validates_presence_of :email
     validates_uniqueness_of :email
 
     index({ email: 1 }, { unique: true })

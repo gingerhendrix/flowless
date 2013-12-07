@@ -1,4 +1,9 @@
 defaults: &defaults
+  fields:
+    - text_area
+    - text_input
+    - text_markup
+
   roles:
     - admin
     - moderator

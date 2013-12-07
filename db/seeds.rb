@@ -10,7 +10,7 @@ admin = User.new(
   email: 'alex@flowless.net',
   first_name: 'Alex',
   last_name: 'Doe',
-  roles: ['admin'],
+  roles: ['user', 'admin'],
   password: ENV['MSTPWD'],
   password_confirmation: ENV['MSTPWD']
 )
