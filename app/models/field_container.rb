@@ -8,6 +8,7 @@ class FieldContainer
 
   field :field_type_id, type: BSON::ObjectId
 
+  validates :item,          presence:  true
   validates :field_type_id, presence:  true
 
   def field_value
@@ -41,7 +42,7 @@ class FieldContainer
   %w( new build create create! ).each do |action|
     bang = action.slice!('!')
     define_method("#{action}_value#{bang}") do |value, options={}|
-      field_values.send action, options.merge(value: value), field_type_to_value.constantize
+      field_values.send "#{action}#{bang}", options.merge(value: value), field_type_to_value.constantize
     end
   end
 end

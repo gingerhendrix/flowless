@@ -8,6 +8,7 @@ if !zeus_running?
 end
 
 ENV["RAILS_ENV"] ||= 'test'
+
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 #require 'rspec/autorun'
@@ -28,6 +29,7 @@ RSpec.configure do |config|
   config.order = "default"
   config.color_enabled = true
   config.tty = true
+  #config.pattern = "**/*_spec.rb"
 
   config.before :each do
     DatabaseCleaner.strategy = :truncation

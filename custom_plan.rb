@@ -5,6 +5,9 @@ class CustomPlan < Zeus::Rails
     require 'simplecov'
     SimpleCov.start 'rails'
 
+    require 'factory_girl'
+    FactoryGirl.reload
+
     # require all ruby files
     Dir["#{Rails.root}/app/**/*.rb"].each { |f| load f }
 
