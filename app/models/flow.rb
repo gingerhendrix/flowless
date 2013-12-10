@@ -3,7 +3,9 @@ class Flow
   include Mongoid::Timestamps
   include Followable
 
-  embeds_many :field_types, class_name: 'FieldType', inverse_of: 'flow'
+  embeds_many :field_types, class_name: 'FieldType',  inverse_of: 'flow'
+  embeds_many :steps,       class_name: 'Step',       inverse_of: 'flow'
+  embeds_many :transitions, class_name: 'Transition', inverse_of: 'flow'
 
   has_many    :items, class_name: 'Item', inverse_of: 'flow',  validate: false
 
@@ -13,4 +15,8 @@ class Flow
 
   validates :name, presence: true
   validates :user, presence: true
+
+  def valid_statuses
+    steps.map &:name
+  end
 end

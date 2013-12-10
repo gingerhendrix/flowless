@@ -4,6 +4,8 @@ class Item
   include Followable
   include Eventable
 
+  delegate :valid_statuses, to: :flow
+
   embeds_many :field_containers, class_name: 'FieldContainer', inverse_of: 'item'
   embeds_many :reminders,        class_name: 'Reminder',       inverse_of: 'item'
   embeds_many :comments,         class_name: 'Comment',        inverse_of: 'item'
@@ -16,4 +18,21 @@ class Item
 
   scope :ready_to_remind,           ->(now)  { where(:reminders.elem_match => { remind_at.lte => now , complete: false }) }
   scope :with_pending_reminder_for, ->(user) { where(:reminders.elem_match => { user_id: user.id, complete: false }) }
+
+  field :status, type: String # todo perform validation on the status with the steps associated to the Flow
+
+  # verify if the status is among the available steps name
+  validates :status, inclusion: { in: proc { |i| i.valid_statuses } }
+
+  def step
+    flow.steps.with_status(status).first
+  end
+
+  def incoming_transitions
+    flow.transitions.for_source(self)
+  end
+
+  def outgoing_transitions
+    flow.transitions.for_destination(self)
+  end
 end
