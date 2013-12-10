@@ -39,10 +39,10 @@ class FieldContainer
   # @note Added a little trick to "move" the bang to the end of the method when present
   #
   # @return new methods definition
-  %w( new build create create! ).each do |action|
-    bang = action.slice!('!')
-    define_method("#{action}_value#{bang}") do |value, options={}|
-      field_values.send "#{action}#{bang}", options.merge(value: value), field_type_to_value.constantize
+  %w( new build create create! ).each do |method|
+    bang = method.slice!('!')
+    define_method("#{method}_value#{bang}") do |value, options={}|
+      field_values.send "#{method}#{bang}", options.merge(value: value), field_type_to_value.constantize
     end
   end
 end

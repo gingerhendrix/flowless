@@ -44,7 +44,8 @@ group :test do
 end
 
 #gem 'redcarpet'
-gem "kaminari"
+gem 'recurrence'
+gem 'kaminari'
 gem 'memcachier'
 gem 'dalli'
 gem "localeapp"

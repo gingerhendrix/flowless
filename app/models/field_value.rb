@@ -13,5 +13,5 @@ class FieldValue
   # Verifying that the FieldValue matches with the associated FieldType
   validates :_type, inclusion: { in: proc { |v| [ v.field_type_to_value ] } }
 
-  scope :versionned, desc(:_id)
+  scope :versionned, -> { desc(:_id) }
 end

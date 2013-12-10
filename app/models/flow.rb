@@ -1,8 +1,9 @@
 class Flow
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Followable
 
-  embeds_many :field_types, class_name: 'FieldType', inverse_of: 'item'
+  embeds_many :field_types, class_name: 'FieldType', inverse_of: 'flow'
 
   has_many    :items, class_name: 'Item', inverse_of: 'flow',  validate: false
 
