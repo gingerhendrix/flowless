@@ -34,4 +34,12 @@ class Transition
   def destination_step
     flow.steps.find(destination_step_id)
   end
+
+  def source_status
+    source_step.name
+  end
+
+  def destination_status
+    destination_step.name
+  end
 end

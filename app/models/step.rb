@@ -33,4 +33,12 @@ class Step
   def outgoing_transitions
     flow.transitions.for_destination(self)
   end
+
+  def create_transition_to!(step, name, description = nil)
+    flow.transitions.create!(source_step: self, destination_step: step, name: name, description: description)
+  end
+
+  def create_transition_from!(step, name, description = nil)
+    flow.transitions.create!(source_step: step, destination_step: self, name: name, description: description)
+  end
 end

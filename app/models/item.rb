@@ -1,3 +1,5 @@
+require 'exceptions'
+
 class Item
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -35,4 +37,23 @@ class Item
   def outgoing_transitions
     flow.transitions.for_destination(self)
   end
+
+  def apply_transition!(transition)
+    if can_apply_transition?(transition)
+      set_status!(transition.destination_status)
+    else
+      raise Exceptions::InapplicableTransition, "Tried to apply Transition '#{transition.id}' from Flow '#{transition.flow.id}' on Item '#{id}'"
+    end
+  end
+
+  private
+
+    def can_apply_transition?(transition)
+      status == transition.source_status && flow == transition.flow
+    end
+
+    def set_status!(status)
+      self.status = status
+      save!
+    end
 end
