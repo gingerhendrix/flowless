@@ -10,6 +10,6 @@ class Follower
   scope :to_remind, -> { where(remindable: true) }
 
   validates :user, presence: true
-  # to prevent a bug where validation of uniquement fails if user is nil
+  # to prevent a bug where validation of uniqueness fails if user is nil
   validates :user, uniqueness: true, if: lambda { |f| f.user }
 end
