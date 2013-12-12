@@ -60,12 +60,12 @@ class Event
   # @note This needs to be call in as a background task
   #
   # @return [ list_of_failed_events ] will be empty if everything was successfull
-  def create_multiple_for(user_ids, entity, action, data)
+  def self.create_multiple_for(user_ids, entity, action, data)
     failed_events = []
     user_ids.each do |user_id|
-      e = Event.build(user_id: user_id, entity: self, action: action, data: data)
+      e = Event.new(user_id: user_id, entity: entity, action: action, data: data)
       failed_events << e unless e.save
-    end
+      end
     failed_events
   end
 end

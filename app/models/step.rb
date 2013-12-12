@@ -22,10 +22,6 @@ class Step
     errors.add :initial, I18n.t('mongoid.errors.messages.taken') if flow.steps.initials.count > 1
   end
 
-  def self.initial
-    initials.first
-  end
-
   def incoming_transitions
     flow.transitions.for_source(self)
   end
@@ -40,5 +36,9 @@ class Step
 
   def create_transition_from!(step, name, description = nil)
     flow.transitions.create!(source_step: step, destination_step: self, name: name, description: description)
+  end
+
+  def self.initial
+    initials.first
   end
 end
