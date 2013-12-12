@@ -11,6 +11,24 @@ describe User do
     end
   end
 
+  context 'meta programming' do
+    describe 'followed_flows, followed_items' do
+      it { user.should respond_to :followed_flows }
+      it { user.should respond_to :followed_items }
+    end
+
+    describe 'checking the detailed behavior of followed_items' do
+      it 'should use the proper scope when requesting only_remindable objects' do
+        expect(Item).to receive(:remindable_for_follower).with(user)
+        user.followed_items(true)
+      end
+      it 'should use the proper scope when requesting only_remindable objects' do
+        expect(Item).to receive(:followed_by).with(user)
+        user.followed_items(false)
+      end
+    end
+  end
+
   context 'public methods' do
     describe 'full_name' do
       let(:user_no_name) { FactoryGirl.build :user_no_name }

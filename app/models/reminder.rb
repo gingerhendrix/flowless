@@ -2,7 +2,7 @@ class Reminder
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  before_validation :calculate_next_occurence
+  before_validation :calculate_next_occurence, :if => lambda { |e| e.recurring? }
 
   embedded_in :item, class_name: 'Item', inverse_of: 'reminders'
 
@@ -23,7 +23,7 @@ class Reminder
 
   def calculate_next_occurence
     self.remind_at = Recurrence.new(ActiveSupport::HashWithIndifferentAccess.new(recurrence)).next + time_of_day
-  rescue
+  rescue Exception
     self.recurrence = {}
   end
 
@@ -38,9 +38,9 @@ class Reminder
   def remind!
     remind_users
     if recurring?
-      self.complete = true
-    else
       calculate_next_occurence
+    else
+      self.complete = true
     end
     save!
   end
