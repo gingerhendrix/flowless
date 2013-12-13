@@ -5,6 +5,7 @@ ruby "2.0.0"
 gem "rails", "4.0.1"
 gem "mongoid", github: "mongoid/mongoid"
 gem "sass-rails", "~> 4.0.1"
+gem 'bootstrap-sass'
 gem "uglifier", ">= 1.3.0"
 gem "coffee-rails", "~> 4.0.1"
 gem 'haml-rails', '~> 0.4'
@@ -52,7 +53,7 @@ gem "localeapp"
 gem "github-markdown", "~> 0.6.3"
 gem 'newrelic_rpm'
 gem 'darwinjs-rails', "~> 1.2"
-gem 'bootstrap-generators', :github => 'decioferreira/bootstrap-generators'
+#gem 'bootstrap-generators', :github => 'decioferreira/bootstrap-generators
 gem "font-awesome-sass-rails"
 gem "simple_form", github: "plataformatec/simple_form"
 gem "devise", "~> 3.2.1"

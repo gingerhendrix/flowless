@@ -4,6 +4,9 @@ Flowless::Application.routes.draw do
     get 'page/:page', :action => :index, :on => :collection
   end
 
+  resources :flows do
+  end
+
   authenticated :user do
     root to: 'home#index', as: :authenticated_root
   end
@@ -13,8 +16,8 @@ Flowless::Application.routes.draw do
   end
 
   devise_for :users, controllers: {
-    registrations: "users/registrations", 
-    passwords: "users/passwords", 
+    registrations: "users/registrations",
+    passwords: "users/passwords",
     omniauth_callbacks: "users/omniauth_callbacks"
   }
 

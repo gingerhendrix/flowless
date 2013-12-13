@@ -5,13 +5,6 @@ GIT
     hashugar (0.0.6)
 
 GIT
-  remote: git://github.com/decioferreira/bootstrap-generators.git
-  revision: 0c3c24eb895cf04b3e03bd6db47a3455b23340cc
-  specs:
-    bootstrap-generators (3.0.0.1)
-      railties (>= 3.1)
-
-GIT
   remote: git://github.com/mongoid/mongoid.git
   revision: 1dfcb14e60b80f5e48a835399c6b384d35e94943
   specs:
@@ -64,6 +57,8 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-sass (3.0.2.1)
+      sass (~> 3.2)
     bson (2.0.0.rc3)
     builder (3.1.4)
     cancan (1.6.10)
@@ -319,7 +314,7 @@ PLATFORMS
 DEPENDENCIES
   better_errors
   binding_of_caller
-  bootstrap-generators!
+  bootstrap-sass
   cancan (~> 1.6.10)
   coffee-rails (~> 4.0.1)
   dalli
