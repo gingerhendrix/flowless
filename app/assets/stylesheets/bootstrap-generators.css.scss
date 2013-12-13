@@ -5,6 +5,11 @@ body {
   padding-top: $navbar-height + 10px;
 }
 
+/* Fix for content shifting issue of 15px with bootstrap: see https://github.com/twbs/bootstrap/issues/9855 */
+body.modal-open, .modal-open .navbar-fixed-top, .modal-open .navbar-fixed-bottom {
+    margin-right: 0px !important;
+}
+
 .pad-top-10px {
   padding-top: 10px;
 }
