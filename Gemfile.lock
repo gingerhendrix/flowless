@@ -22,6 +22,13 @@ GIT
       actionpack (>= 4.0.0, < 4.1)
       activemodel (>= 4.0.0, < 4.1)
 
+GIT
+  remote: git://github.com/thomas-mcdonald/bootstrap-sass.git
+  revision: b9bb1967d3e8c3e0f95a6253273affbd6e80eba9
+  specs:
+    bootstrap-sass (3.0.3.0)
+      sass (~> 3.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -57,8 +64,6 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bootstrap-sass (3.0.2.1)
-      sass (~> 3.2)
     bson (2.0.0.rc3)
     builder (3.1.4)
     cancan (1.6.10)
@@ -314,7 +319,7 @@ PLATFORMS
 DEPENDENCIES
   better_errors
   binding_of_caller
-  bootstrap-sass
+  bootstrap-sass!
   cancan (~> 1.6.10)
   coffee-rails (~> 4.0.1)
   dalli

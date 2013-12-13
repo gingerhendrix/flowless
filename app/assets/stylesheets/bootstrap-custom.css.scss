@@ -5,10 +5,28 @@ body {
   padding-top: $navbar-height + 10px;
 }
 
-/* Fix for content shifting issue of 15px with bootstrap: see https://github.com/twbs/bootstrap/issues/9855 */
+/* Fix #1 for content shifting issue of 15px with bootstrap: see https://github.com/twbs/bootstrap/issues/9855 */
 body.modal-open, .modal-open .navbar-fixed-top, .modal-open .navbar-fixed-bottom {
     margin-right: 0px !important;
 }
+/* end of Fix #1 */
+
+/* Fix #2 for broken drop down in justified button groups: see https://github.com/twbs/bootstrap/issues/11041 */
+.btn-group-justified .btn {
+  float: float;
+  display: inline-block;
+  width: auto;
+}
+.btn-group-justified > .btn,
+.btn-group-justified > .btn-group {
+  float: none;
+  display: table-cell;
+  width: 1%;
+}
+.btn-group-justified > .btn-group > .btn {
+  width: 100%;
+}
+/* end of Fix #2 */
 
 .pad-top-10px {
   padding-top: 10px;

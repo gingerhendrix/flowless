@@ -1,39 +1,37 @@
 #new_flow.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", role: "dialog", tabindex: "-1"}
   .modal-dialog
     .modal-content
-      = simple_form_for @flow do |f|
+      = simple_form_for @flow, wrapper: 'bootstrap3_inline' do |f|
         .modal-header
           %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} &times;
           %h4#myModalLabel.modal-title Create a new flow
         .modal-body
-          = f.input :name
+          = f.input :name, placeholder: 'Name your Flow', hint: 'Example: if you want to manage projects, name your Flow "Project", etc.', input_html: { class: 'input-lg' }
 
-          .toto
-            .btn-group.btn-group-justified
-              .btn-group
-                %a.btn.btn-default.dropdown-toggle{ data: { toggle: 'dropdown' } }
-                  = 'Fields'
-                  %span.caret
-                %ul.dropdown-menu{ role: 'menu' }
-                  %li
-                    %a= 'Preview'
+          %ul.nav.nav-tabs.nav-justified
+            %li.dropdown.active
+              %a.dropdown-toggle#fields{ data: { toggle: 'dropdown' } }
+                Fields
+                %span.caret
+              %ul.dropdown-menu{role: 'menu', aria: { labelledby: 'fields' } }
+                %li.active
+                  %a{ href: '#fields-edit', tabindex: '-1', data: { toggle: 'tab' } } Edit
+                %li
+                  %a{ href: '#fields-preview', tabindex: '-1', data: { toggle: 'tab' } } Preview
+            %li
+              %a{href: '#steps', data: { toggle: 'tab' } } Steps
 
-              %a.btn.btn-default{ role: 'button' }= 'Steps'
 
-              / <div class="btn-group btn-group-justified">
-              /   <div class="btn-group">
-              /     <a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-              /       Right dropdown <span class="caret"></span>
-              /     </a>
-              /     <ul class="dropdown-menu" role="menu">
-              /       <li><a href="#">Action</a></li>
-              /       <li><a href="#">Another action</a></li>
-              /       <li><a href="#">Something else here</a></li>
-              /       <li class="divider"></li>
-              /       <li><a href="#">Separated link</a></li>
-              /     </ul>
-              /   </div>
-              / <a class="btn btn-default" role="button">Middle</a></div>
+          .tab-content.closing-tab-box
+
+            #fields-edit.tab-pane.fade.in.active
+              Edit fields
+
+            #fields-preview.tab-pane.fade
+              Preview fields
+
+            #steps.tab-pane.fade
+              Edit steps
 
         .modal-footer
           = f.button :button, 'Cancel', class: 'btn-default', type: 'button', data: { dismiss: 'modal' }

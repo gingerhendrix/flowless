@@ -47,6 +47,20 @@ SimpleForm.setup do |config|
     b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
   end
 
+  config.wrappers :bootstrap3_inline, tag: 'div', class: 'form-inline', error_class: 'has-error',
+      defaults: { input_html: { class: 'default_class' } } do |b|
+
+    b.use :html5
+    b.use :min_max
+    b.use :maxlength
+    b.use :placeholder
+    b.optional :pattern
+    b.optional :readonly
+
+    b.use :input
+    b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
+  end
+
   config.wrappers :checkbox, tag: :div, class: "checkbox", error_class: "has-error" do |b|
     b.use :html5
     b.use :placeholder
