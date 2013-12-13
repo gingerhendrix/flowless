@@ -1,12 +1,13 @@
 #new_flow.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", role: "dialog", tabindex: "-1"}
   .modal-dialog
     .modal-content
-      = simple_form_for @flow, wrapper: 'bootstrap3_inline' do |f|
+      = simple_form_for @flow, html: { class: 'form-inline' }  do |f|
         .modal-header
           %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} &times;
           %h4#myModalLabel.modal-title Create a new flow
         .modal-body
-          = f.input :name, placeholder: 'Name your Flow', hint: 'Example: if you want to manage projects, name your Flow "Project", etc.', input_html: { class: 'input-lg' }
+          .spacer-20px
+            = f.input :name, placeholder: 'Name your Flow', hint: 'Example: if you want to manage projects, name your Flow "Project", etc.', input_html: { class: 'input-lg' }
 
           %ul.nav.nav-tabs.nav-justified
             %li.dropdown.active
@@ -25,7 +26,38 @@
           .tab-content.closing-tab-box
 
             #fields-edit.tab-pane.fade.in.active
-              Edit fields
+              .well.form-group{ draggable: 'true' }
+                %span.glyphicon.glyphicon-align-justify.pull-left{ style: 'padding-top: 8px; margin-right: 15px'}
+                %input.form-control{ type: 'text', placeholder: 'Name your Field', name: 'flow[field][name]', style: 'width:200px;'}
+                %select.form-control{ name: 'flow[field][type]', style: 'width:200px;'}
+                  %option{ value: '' }= 'Select a field type:'
+                  %option{ value: 'text' }= 'Text'
+                  %option{ value: 'email' }= 'Email'
+                  %option{ value: 'markup' }= 'Markup'
+                %a.btn.btn-default
+                  %span.glyphicon.glyphicon-cog
+
+              .well.form-group{ draggable: 'true' }
+                %span.glyphicon.glyphicon-align-justify.pull-left{ style: 'padding-top: 8px; margin-right: 15px'}
+                %input.form-control{ type: 'text', placeholder: 'Name your Field', name: 'flow[field][name]', style: 'width:200px;'}
+                %select.form-control{ name: 'flow[field][type]', style: 'width:200px;'}
+                  %option{ value: '' }= 'Select a field type:'
+                  %option{ value: 'text' }= 'Text'
+                  %option{ value: 'email' }= 'Email'
+                  %option{ value: 'markup' }= 'Markup'
+                %a.btn.btn-default
+                  %span.glyphicon.glyphicon-cog
+
+              .well.form-group{ draggable: 'true' }
+                %span.glyphicon.glyphicon-align-justify.pull-left{ style: 'padding-top: 8px; margin-right: 15px'}
+                %input.form-control{ type: 'text', placeholder: 'Name your Field', name: 'flow[field][name]', style: 'width:200px;'}
+                %select.form-control{ name: 'flow[field][type]', style: 'width:200px;'}
+                  %option{ value: '' }= 'Select a field type:'
+                  %option{ value: 'text' }= 'Text'
+                  %option{ value: 'email' }= 'Email'
+                  %option{ value: 'markup' }= 'Markup'
+                %a.btn.btn-default
+                  %span.glyphicon.glyphicon-cog
 
             #fields-preview.tab-pane.fade
               Preview fields

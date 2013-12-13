@@ -11,8 +11,17 @@
  *= require_self
  *= require_tree .
 */
-.form-inline {
-  margin-bottom: 20px;
+form.form-inline {
+  .spacer-20px {
+    margin-bottom: 20px;
+  }
+  .form-group {
+    width: 100%;
+  }
+  .well {
+    width:  100%;
+    margin-bottom: 10px;
+  }
 }
 
 .closing-tab-box

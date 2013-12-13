@@ -57,6 +57,11 @@ SimpleForm.setup do |config|
     b.optional :pattern
     b.optional :readonly
 
+    b.wrapper tag: 'div' do |label|
+      label.use :label, wrap_with: { class: 'sr-only' }
+      label.use :error, wrap_with: { tag: 'em', class: 'help-inline control-label pad-left-5px' }
+    end
+
     b.use :input
     b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
   end
