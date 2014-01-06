@@ -1,5 +1,5 @@
 class FieldValue
-  class TextAreaValue < ::FieldValue
+  class EmailValue < ::FieldValue
     include Mongoid::Document
 
     field :value, type: String

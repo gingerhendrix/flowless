@@ -21,26 +21,26 @@ describe FieldContainer do
 
     describe 'checking the detailed behavior of the #created_value! & #build case' do
       before :each do
-        field_container.stub(:field_type_to_value).and_return 'FieldValue::TextInputValue'
+        field_container.stub(:field_type_to_value).and_return 'FieldValue::InputValue'
       end
 
       it 'should work with just a value' do
-        expect(field_container.field_values).to receive(:build).with({ value: 'my_value' }, FieldValue::TextInputValue)
+        expect(field_container.field_values).to receive(:build).with({ value: 'my_value' }, FieldValue::InputValue)
         field_container.build_value('my_value')
       end
 
       it 'should work with other field also' do
-        field_container.field_values.should_receive(:build).with({ value: 'my_value', other_field: 'other_value' }, FieldValue::TextInputValue)
+        field_container.field_values.should_receive(:build).with({ value: 'my_value', other_field: 'other_value' }, FieldValue::InputValue)
         field_container.build_value('my_value', { other_field: 'other_value' })
       end
 
       it 'should work with just a value' do
-        expect(field_container.field_values).to receive(:create!).with({ value: 'my_value' }, FieldValue::TextInputValue)
+        expect(field_container.field_values).to receive(:create!).with({ value: 'my_value' }, FieldValue::InputValue)
         field_container.create_value!('my_value')
       end
 
       it 'should work with other field also' do
-        field_container.field_values.should_receive(:create!).with({ value: 'my_value', other_field: 'other_value' }, FieldValue::TextInputValue)
+        field_container.field_values.should_receive(:create!).with({ value: 'my_value', other_field: 'other_value' }, FieldValue::InputValue)
         field_container.create_value!('my_value', { other_field: 'other_value' })
       end
     end
@@ -48,8 +48,8 @@ describe FieldContainer do
 
   context 'public methods' do
     describe 'field_value' do
-      let(:field_value_1) { FactoryGirl.build :text_input_value, value: '1', _type: "FieldValue::TextInputValue" }
-      let(:field_value_2) { FactoryGirl.build :text_input_value, value: '2', _type: "FieldValue::TextInputValue" }
+      let(:field_value_1) { FactoryGirl.build :input_value, value: '1', _type: "FieldValue::InputValue" }
+      let(:field_value_2) { FactoryGirl.build :input_value, value: '2', _type: "FieldValue::InputValue" }
 
       before :each do
         field_container.stub_chain(:field_values, :versionned).and_return [ field_value_1, field_value_2 ]
@@ -72,7 +72,7 @@ describe FieldContainer do
       end
 
       describe '2 values are present' do
-        let(:field_value) { FactoryGirl.build :text_input_value, value: 'ok', _type: "FieldValue::TextInputValue" }
+        let(:field_value) { FactoryGirl.build :input_value, value: 'ok', _type: "FieldValue::InputValue" }
 
         before :each do
           field_container.stub(:field_value).and_return field_value

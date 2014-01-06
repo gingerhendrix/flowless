@@ -2,19 +2,19 @@ source "https://rubygems.org"
 
 ruby "2.0.0"
 
-gem "rails", "4.0.1"
-gem "mongoid", github: "mongoid/mongoid"
-gem "sass-rails", "~> 4.0.1"
-gem 'bootstrap-sass', github: "thomas-mcdonald/bootstrap-sass"
-gem "uglifier", ">= 1.3.0"
-gem "coffee-rails", "~> 4.0.1"
-gem 'haml-rails', '~> 0.4'
+gem "rails"
+gem "mongoid"
+gem "sass-rails"
+gem 'bootstrap-sass'
+gem "uglifier"
+gem "coffee-rails"
+gem 'haml-rails'
 gem "therubyracer", platforms: :ruby
-gem "jquery-rails", '3.0.4'
+gem "jquery-rails"
 gem "turbolinks"
-gem "jbuilder", "~> 1.2"
-gem 'foreman',   '~> 0.63.0'
-gem 'puma',      '~> 2.6.0'
+gem "jbuilder"
+gem 'foreman'
+gem 'puma'
 gem 'coveralls', require: false
 
 group :production do
@@ -29,10 +29,10 @@ group :development do
 end
 
 group :development, :test do
-  gem 'better_errors'
-  gem 'binding_of_caller'
+  # gem 'better_errors'
+  # gem 'binding_of_caller'
   gem "erb2haml"
-  gem "zeus", '0.13.3'
+  gem "zeus"
   gem "rspec-rails"
   gem "factory_girl_rails"
   gem 'terminal-notifier-guard'
@@ -51,15 +51,14 @@ gem 'kaminari'
 gem 'memcachier'
 gem 'dalli'
 gem "localeapp"
-gem "github-markdown", "~> 0.6.3"
+gem "github-markdown"
 gem 'newrelic_rpm'
-gem 'darwinjs-rails', "~> 1.2"
-#gem 'bootstrap-generators', :github => 'decioferreira/bootstrap-generators
+gem 'darwinjs-rails'
 gem "font-awesome-sass-rails"
-gem "simple_form", github: "plataformatec/simple_form"
-gem "devise", "~> 3.2.1"
-gem "cancan", "~> 1.6.10"
+gem "simple_form"
+gem "devise"
+gem "cancan"
 gem "omniauth"
 gem "omniauth-facebook"
 gem "omniauth-twitter"
-gem "hashugar", github: "alex-klepa/hashugar"
+gem "hashugar"

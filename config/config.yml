@@ -1,8 +1,17 @@
 defaults: &defaults
   fields:
-    - text_area
-    - text_input
-    - text_markup
+    - email
+    - input
+    - textarea
+    - dropdown
+    - boolean
+    - radiobutton
+    - checkbox
+    - number
+    - datetime
+    - file
+    - user
+    - objectlink
 
   roles:
     - admin

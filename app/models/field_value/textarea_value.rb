@@ -1,5 +1,5 @@
 class FieldValue
-  class TextMarkupValue < ::FieldValue
+  class TextareaValue < ::FieldValue
     include Mongoid::Document
 
     field :value, type: String
