@@ -77,6 +77,12 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    coveralls (0.7.0)
+      multi_json (~> 1.3)
+      rest-client
+      simplecov (>= 0.7)
+      term-ansicolor
+      thor
     dalli (2.6.4)
     darwinjs-rails (1.2)
       coffee-rails (~> 4.0)
@@ -289,6 +295,8 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
+    term-ansicolor (1.2.2)
+      tins (~> 0.8)
     terminal-notifier-guard (1.5.3)
     therubyracer (0.12.0)
       libv8 (~> 3.16.14.0)
@@ -298,6 +306,7 @@ GEM
       atomic
     tilt (1.4.1)
     timers (1.1.0)
+    tins (0.13.1)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -322,6 +331,7 @@ DEPENDENCIES
   bootstrap-sass!
   cancan (~> 1.6.10)
   coffee-rails (~> 4.0.1)
+  coveralls
   dalli
   darwinjs-rails (~> 1.2)
   database_cleaner

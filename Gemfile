@@ -15,6 +15,7 @@ gem "turbolinks"
 gem "jbuilder", "~> 1.2"
 gem 'foreman',   '~> 0.63.0'
 gem 'puma',      '~> 2.6.0'
+gem 'coveralls', require: false
 
 group :production do
   gem 'rails_12factor'

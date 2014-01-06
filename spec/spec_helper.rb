@@ -2,6 +2,9 @@ def zeus_running?
   File.exists? '.zeus.sock'
 end
 
+require 'coveralls'
+Coveralls.wear!
+
 if !zeus_running?
   require 'simplecov'
   SimpleCov.start 'rails'
