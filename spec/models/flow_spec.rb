@@ -6,7 +6,7 @@ describe Flow do
   context 'building and validation' do
     describe 'standard flow' do
       it 'should build successfully and be valid' do
-        expect(flow.valid?).to be_true
+        expect(flow.valid?).to be_truthy
       end
     end
   end

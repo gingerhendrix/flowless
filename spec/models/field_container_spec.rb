@@ -6,7 +6,7 @@ describe FieldContainer do
   context 'building and validation' do
     describe 'standard field_container' do
       it 'should build successfully and be invalid' do
-        expect(field_container.valid?).to be_false
+        expect(field_container.valid?).to be_falsey
       end
     end
   end

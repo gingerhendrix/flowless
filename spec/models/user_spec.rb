@@ -6,7 +6,7 @@ describe User do
   context 'building and validation' do
     describe 'standard user' do
       it 'should build successfully and be valid' do
-        expect(user.valid?).to be_true
+        expect(user.valid?).to be_truthy
       end
     end
   end

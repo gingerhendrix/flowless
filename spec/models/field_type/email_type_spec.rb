@@ -7,7 +7,7 @@ describe FieldType::EmailType do
   context 'building and validation on STI' do
     describe 'email_type' do
       it 'should build successfully and be valid' do
-        expect(email_type).to be_true
+        expect(email_type).to be_truthy
       end
     end
   end

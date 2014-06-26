@@ -7,7 +7,7 @@ describe FieldType::TextareaType do
   context 'building and validation on STI' do
     describe 'textarea_type' do
       it 'should build successfully and be valid' do
-        expect(textarea_type.valid?).to be_true
+        expect(textarea_type.valid?).to be_truthy
       end
     end
   end

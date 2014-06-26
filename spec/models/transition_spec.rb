@@ -6,7 +6,7 @@ describe Transition do
   context 'building and validation' do
     describe 'standard transition' do
       it 'should build successfully and be valid' do
-        expect(transition.valid?).to be_true
+        expect(transition.valid?).to be_truthy
       end
     end
 

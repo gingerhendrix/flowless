@@ -11,7 +11,7 @@ gem 'haml-rails',       '~> 0.5'   # brings Haml support
 gem 'bootstrap-sass',   '~> 3.1'   # adds the bootstrap framework
 gem 'uglifier',         '~> 2.5'   # compressed and uglify JS
 gem 'darwinjs-rails',   '~> 1.2'   # MV object framework on top of jQuery
-gem 'foreman',          '~> 0.74'  # simulate the production env with the different processes
+#gem 'foreman',          '~> 0.74'  # simulate the production env with the different processes
 gem 'puma',             '~> 2.8'   # webserver
 gem 'recurrence',       '~> 1.3'   # handles recurrence to manage events
 gem 'kaminari',         '~> 0.16'  # handles pagination
@@ -23,6 +23,8 @@ gem 'newrelic_rpm',     '~> 3.9'   # monitoring on newrelic
 gem 'simple_form',      '~> 3.0'   # helps creates form easier
 gem 'devise',           '~> 3.2'   # authentication handling
 gem 'cancan',           '~> 1.6'   # access right management
+gem 'hashugar',         '~> 0.0.6' # allows for nice access to hashes
+gem 'turbolinks',       '~> 2.2'   # allows not to realod the entire page with CSS and JS
 
 gem 'omniauth',         '~> 1.2'   # handles omniauth authentication
 gem 'omniauth-facebook','~> 1.6'   # works with omniauth to authenticate with facebook
@@ -30,10 +32,9 @@ gem 'omniauth-twitter', '~> 1.0'   # works with omniauth to authenticate with tw
 
 # gem 'redcarpet'
 # gem 'therubyracer', platforms: :ruby  # allow ruby to interpret JS
-# gem 'turbolinks'                      # allows not to realod the entire page with CSS and JS
 # gem 'jbuilder'                        # builds json
 # gem 'font-awesome-sass-rails          # helps use many fonts on the app
-# gem 'hashugar'
+
 
 gem 'coveralls', require: false  # provides test coverage data
 
@@ -61,6 +62,7 @@ group :development, :test do
   gem 'erb2haml'
   gem 'zeus'
   gem 'rspec-rails'
+  gem 'rspec-activemodel-mocks'
   gem 'factory_girl_rails'
   gem 'terminal-notifier-guard'
 end

@@ -10,7 +10,7 @@ describe Item do
   context 'building and validation' do
     describe 'standard item' do
       it 'should build successfully and be valid' do
-        expect(item.valid?).to be_true
+        expect(item.valid?).to be_truthy
       end
     end
 
@@ -18,7 +18,7 @@ describe Item do
       it 'status inclusion' do
         item.errors.clear
         item.status = 'no_among_the_list'
-        expect(item.valid?).to be_false
+        expect(item.valid?).to be_falsey
         expect(item.errors.keys).to include(:status)
       end
     end
@@ -91,15 +91,15 @@ describe Item do
       end
 
       it 'should be false when status are different' do
-        expect(item.send :can_apply_transition?, wrong_t1).to be_false
+        expect(item.send :can_apply_transition?, wrong_t1).to be_falsey
       end
 
       it 'should be false when flow are different' do
-        expect(item.send :can_apply_transition?, wrong_t2).to be_false
+        expect(item.send :can_apply_transition?, wrong_t2).to be_falsey
       end
 
       it 'otherwise it should be true' do
-        expect(item.send :can_apply_transition?, good_t).to be_true
+        expect(item.send :can_apply_transition?, good_t).to be_truthy
       end
     end
 

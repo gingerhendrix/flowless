@@ -7,7 +7,7 @@ describe Event do
   context 'building and validation' do
     describe 'standard event' do
       it 'should build successfully and be valid' do
-        expect(event.valid?).to be_true
+        expect(event.valid?).to be_truthy
       end
     end
 
@@ -97,11 +97,11 @@ describe Event do
 
     describe 'read?' do
       it 'should be true' do
-        expect(read_event.read?).to be_true
+        expect(read_event.read?).to be_truthy
       end
 
       it 'should be false' do
-        expect(event.read?).to be_false
+        expect(event.read?).to be_falsey
       end
     end
   end

@@ -7,7 +7,7 @@ describe Step do
     describe 'standard step' do
       it 'should build successfully and be valid' do
         expect(step).to receive(:single_initial_step)
-        expect(step.valid?).to be_true
+        expect(step.valid?).to be_truthy
       end
     end
 

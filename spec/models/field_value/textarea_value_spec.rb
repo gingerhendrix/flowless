@@ -15,7 +15,7 @@ describe FieldValue::TextareaValue do
   context 'building and validation on STI' do
     describe 'textarea_value' do
       it 'should build successfully and be valid' do
-        expect(textarea_value.valid?).to be_true
+        expect(textarea_value.valid?).to be_truthy
       end
     end
   end

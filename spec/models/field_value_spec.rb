@@ -15,7 +15,7 @@ describe FieldValue do
       end
 
       it 'should build successfully and be invalid' do
-        expect(field_value.valid?).to be_false
+        expect(field_value.valid?).to be_falsey
       end
     end
 
@@ -27,7 +27,7 @@ describe FieldValue do
       end
 
       it 'should be invalid' do
-        expect(textarea_value.valid?).to be_false
+        expect(textarea_value.valid?).to be_falsey
       end
     end
 
@@ -39,7 +39,7 @@ describe FieldValue do
       end
 
       it 'should be valid' do
-        expect(input_value.valid?).to be_true
+        expect(input_value.valid?).to be_truthy
       end
     end
   end

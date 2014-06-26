@@ -6,7 +6,7 @@ describe Message do
   context 'building and validation' do
     describe 'standard message' do
       it 'should build successfully and be valid' do
-        expect(message.valid?).to be_true
+        expect(message.valid?).to be_truthy
       end
     end
   end

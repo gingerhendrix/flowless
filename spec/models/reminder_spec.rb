@@ -7,7 +7,7 @@ describe Reminder do
   context 'building and validation' do
     describe 'standard reminder' do
       it 'should build successfully and be valid' do
-        expect(reminder.valid?).to be_true
+        expect(reminder.valid?).to be_truthy
       end
     end
 
@@ -65,7 +65,7 @@ describe Reminder do
         reminder.complete = false
         expect(reminder).to receive(:save!)
         reminder.remind!
-        expect(reminder.complete).to be_true
+        expect(reminder.complete).to be_truthy
       end
 
       it 'should calculate next occurence if recurring' do
@@ -81,11 +81,11 @@ describe Reminder do
 
     describe 'recurring?' do
       it 'should be true' do
-        expect(recurring.recurring?).to be_true
+        expect(recurring.recurring?).to be_truthy
       end
 
       it 'should be false' do
-        expect(reminder.recurring?).to be_false
+        expect(reminder.recurring?).to be_falsey
       end
     end
   end

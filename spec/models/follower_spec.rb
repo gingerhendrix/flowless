@@ -6,7 +6,7 @@ describe Follower do
   context 'building and validation' do
     describe 'standard follower' do
       it 'should build successfully and be valid' do
-        expect(follower.valid?).to be_true
+        expect(follower.valid?).to be_truthy
       end
     end
   end

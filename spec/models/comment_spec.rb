@@ -6,7 +6,7 @@ describe Comment do
   context 'building and validation' do
     describe 'standard comment' do
       it 'should build successfully and be valid' do
-        expect(comment.valid?).to be_true
+        expect(comment.valid?).to be_truthy
       end
     end
   end

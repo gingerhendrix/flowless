@@ -7,7 +7,7 @@ describe FieldType::InputType do
   context 'building and validation on STI' do
     describe 'input_type' do
       it 'should build successfully and be valid' do
-        expect(input_type.valid?).to be_true
+        expect(input_type.valid?).to be_truthy
       end
     end
   end
