@@ -1,64 +1,66 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-ruby "2.0.0"
+ruby '2.0.0'
 
-gem "rails"
-gem "mongoid"
-gem "sass-rails"
-gem 'bootstrap-sass'
-gem "uglifier"
-gem "coffee-rails"
-gem 'haml-rails'
-gem "therubyracer", platforms: :ruby
-gem "jquery-rails"
-gem "turbolinks"
-gem "jbuilder"
-gem 'foreman'
-gem 'puma'
-gem 'coveralls', require: false
+gem 'rails',            '~> 4.1'   # rails
+gem 'mongoid',          '~> 4.0'   # mongoid
+gem 'sass-rails',       '~> 4.0'   # brings sass support
+gem 'coffee-rails',     '~> 4.0'   # brings coffee support
+gem 'jquery-rails',     '~> 3.1'   # brings jQuery support
+gem 'haml-rails',       '~> 0.5'   # brings Haml support
+gem 'bootstrap-sass',   '~> 3.1'   # adds the bootstrap framework
+gem 'uglifier',         '~> 2.5'   # compressed and uglify JS
+gem 'darwinjs-rails',   '~> 1.2'   # MV object framework on top of jQuery
+gem 'foreman',          '~> 0.74'  # simulate the production env with the different processes
+gem 'puma',             '~> 2.8'   # webserver
+gem 'recurrence',       '~> 1.3'   # handles recurrence to manage events
+gem 'kaminari',         '~> 0.16'  # handles pagination
+gem 'memcachier',       '~> 0.0.2' # handles the caching process
+gem 'dalli',            '~> 2.7'   # works with memcachier to handle caching
+gem 'localeapp',        '~> 0.8'   # I18n translation backend
+gem 'github-markdown',  '~> 0.6'   # Interprets github markdown
+gem 'newrelic_rpm',     '~> 3.9'   # monitoring on newrelic
+gem 'simple_form',      '~> 3.0'   # helps creates form easier
+gem 'devise',           '~> 3.2'   # authentication handling
+gem 'cancan',           '~> 1.6'   # access right management
+
+gem 'omniauth',         '~> 1.2'   # handles omniauth authentication
+gem 'omniauth-facebook','~> 1.6'   # works with omniauth to authenticate with facebook
+gem 'omniauth-twitter', '~> 1.0'   # works with omniauth to authenticate with twitter
+
+# gem 'redcarpet'
+# gem 'therubyracer', platforms: :ruby  # allow ruby to interpret JS
+# gem 'turbolinks'                      # allows not to realod the entire page with CSS and JS
+# gem 'jbuilder'                        # builds json
+# gem 'font-awesome-sass-rails          # helps use many fonts on the app
+# gem 'hashugar'
+
+gem 'coveralls', require: false  # provides test coverage data
 
 group :production do
   gem 'rails_12factor'
 end
 
 group :development do
-  gem "guard-rspec"
-  gem "pry"
-  gem "quiet_assets"
-  gem "pry-rails"
-end
-
-group :development, :test do
-  # gem 'better_errors'
-  # gem 'binding_of_caller'
-  gem "erb2haml"
-  gem "zeus"
-  gem "rspec-rails"
-  gem "factory_girl_rails"
-  gem 'terminal-notifier-guard'
+  gem 'guard-rspec'
+  gem 'pry'
+  gem 'quiet_assets'
+  gem 'pry-rails'
 end
 
 group :test do
-  gem "mongoid-rspec"
-  gem "ffaker"
-  gem "simplecov", require: false
-  gem "database_cleaner"
+  gem 'mongoid-rspec'
+  gem 'ffaker'
+  gem 'simplecov', require: false
+  gem 'database_cleaner'
 end
 
-#gem 'redcarpet'
-gem 'recurrence'
-gem 'kaminari'
-gem 'memcachier'
-gem 'dalli'
-gem "localeapp"
-gem "github-markdown"
-gem 'newrelic_rpm'
-gem 'darwinjs-rails'
-gem "font-awesome-sass-rails"
-gem "simple_form"
-gem "devise"
-gem "cancan"
-gem "omniauth"
-gem "omniauth-facebook"
-gem "omniauth-twitter"
-gem "hashugar"
+group :development, :test do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'erb2haml'
+  gem 'zeus'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'terminal-notifier-guard'
+end
