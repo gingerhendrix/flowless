@@ -199,6 +199,9 @@ GEM
       slop (~> 3.4)
     pry-rails (0.3.2)
       pry (>= 0.9.10)
+    pry-stack_explorer (0.4.9.1)
+      binding_of_caller (>= 0.7)
+      pry (>= 0.9.11)
     puma (2.8.2)
       rack (>= 1.1, < 2.0)
     quiet_assets (1.0.3)
@@ -340,6 +343,7 @@ DEPENDENCIES
   omniauth-twitter (~> 1.0)
   pry
   pry-rails
+  pry-stack_explorer
   puma (~> 2.8)
   quiet_assets
   rails (~> 4.1)

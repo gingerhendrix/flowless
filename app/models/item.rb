@@ -18,8 +18,9 @@ class Item
   validates :user, presence: true
   validates :flow, presence: true
 
-  scope :ready_to_remind,           ->(now)  { where(:reminders.elem_match => { remind_at.lte => now , complete: false }) }
-  scope :with_pending_reminder_for, ->(user) { where(:reminders.elem_match => { user_id: user.id, complete: false }) }
+  scope :ready_to_remind,                    ->(now)           { where(:reminders.elem_match => { remind_at.lte => now , complete: false }) }
+  scope :with_pending_reminder_for,          ->(user)          { where(:reminders.elem_match => { user_id: user.id, complete: false }) }
+  scope :with_current_values_for_field_type, ->(field_type_id) { where(:field_containers.elem_match => { field_type_id: field_type_id, :'field_values.current' => true }) }
 
   field :status, type: String # todo perform validation on the status with the steps associated to the Flow
 
@@ -36,6 +37,34 @@ class Item
 
   def outgoing_transitions
     flow.transitions.for_destination(self)
+  end
+
+  # because we want to be easily able to list all the current field_values of an item with thinking about versionning
+  # options can either be passing a selector or a scope to search directly within the field_values or influence the scopes
+  # and criteria on the field_containers:
+  # i.e: options = { field_container: { scope: { name: 'some_scope', params: } }, field_value: { selector: { some: :selector} } }
+  # TOTEST
+  def current_field_values(options = {})
+    options.reverse_merge!(field_container: {}, field_value: {})
+
+    scope      = options[:field_container][:scope]
+    selector   = options[:field_container][:selector]
+
+    containers = field_containers.with_current_values
+
+    if scope
+      if (params = scope[:params] ? [*scope[:params]] : nil)
+        containers.send(scope[:name], *params)
+      else
+        containers.send(scope[:name])
+      end
+    elsif selector
+      containers.where(selector)
+    else
+      containers
+    end.map do |field_container|
+      field_container.current_field_value(options[:field_value])
+    end.compact # to avoid return an array with nil items
   end
 
   def apply_transition!(transition)

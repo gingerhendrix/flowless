@@ -44,9 +44,7 @@ end
 
 group :development do
   gem 'guard-rspec'
-  gem 'pry'
   gem 'quiet_assets'
-  gem 'pry-rails'
 end
 
 group :test do
@@ -57,6 +55,10 @@ group :test do
 end
 
 group :development, :test do
+  gem 'pry'
+  gem 'pry-rails'
+  #gem 'pry-debugger'
+  gem 'pry-stack_explorer'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'erb2haml'

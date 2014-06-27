@@ -1,6 +1,10 @@
+# We store the field_values inside a field_container rather than directly in the item because we want to
+# keep all the possible version of the field_values, and therefore we need to attach all field_value history
 class FieldContainer
   include Mongoid::Document
   include Mongoid::Timestamps
+
+  delegate :flow, to: :item
 
   embedded_in :item, class_name: 'Item', inverse_of: 'field_containers'
 
@@ -8,15 +12,43 @@ class FieldContainer
 
   field :field_type_id, type: BSON::ObjectId
 
+  scope :with_current_values, ->()              { where(:'field_values.current' => true) }
+  scope :with_field_type,     ->(field_type_id) { where(field_type_id: field_type_id) }
+
   validates :item,          presence:  true
   validates :field_type_id, presence:  true
 
+  # TOFIX
   def field_value
     field_values.versionned.first
   end
 
-  def value
-    field_value.try(:value)
+  # because we want to be easily able to list all the current field_values of an item with thinking about versionning
+  # options can either be passing a selector or a scope to search directly within the field_values
+  # options = { scope: { name: :my_scope, params: [ :stuff1, :stuff2 ] } } or { scope: { name: :my_scope, params: :one_stuff } }
+  # or passing selector: options = { selector: { field: :value } }
+  # TOTEST
+  def current_field_value(options = {})
+    scope    = options[:scope]
+    selector = options[:selector]
+    values   = field_values.current
+    # there is supposed to be only one current value, so using .first is supposed to be safe here
+    if options[:scope]
+      if (params = scope[:params] ? [*scope[:params]] : nil)
+        values.send(scope[:name], *params)
+      else
+        values.send(scope[:name])
+      end
+    elsif selector
+      values.where(selector)
+    else
+      values
+    end.first
+  end
+
+  # TOFIX
+  def current_value
+    current_field_value.try(:value)
   end
 
   def field_type

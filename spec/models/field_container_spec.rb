@@ -60,26 +60,26 @@ describe FieldContainer do
       end
     end
 
-    describe 'value' do
+    describe 'current_value' do
       describe 'no values present' do
         before :each do
           field_container.stub(:field_value).and_return nil
         end
 
         it 'should not raise an error and return nil' do
-          expect(field_container.value).to be(nil)
+          expect(field_container.current_value).to be(nil)
         end
       end
 
       describe '2 values are present' do
-        let(:field_value) { FactoryGirl.build :input_value, value: 'ok', _type: "FieldValue::InputValue" }
+        let(:field_value) { FactoryGirl.build :current_input_value, value: 'ok', _type: "FieldValue::InputValue" }
 
         before :each do
-          field_container.stub(:field_value).and_return field_value
+          field_container.stub(:current_field_value).and_return field_value
         end
 
         it 'should return the right value' do
-          expect(field_container.value).to eq('ok')
+          expect(field_container.current_value).to eq('ok')
         end
       end
     end
