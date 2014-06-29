@@ -10,5 +10,9 @@ class FieldType
 
     field     :mutiple_emails, type: Boolean, default: false # can the email field contain more than one email address
     validates :mutiple_emails, presence: true
+
+    def multiple_email_allowed?
+      mutiple_emails
+    end
   end
 end

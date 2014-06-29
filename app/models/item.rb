@@ -66,6 +66,7 @@ class Item
       field_container.current_field_value(options[:field_value])
     end.compact # to avoid return an array with nil items
   end
+  alias_method :values, :current_field_values
 
   def apply_transition!(transition)
     if can_apply_transition?(transition)

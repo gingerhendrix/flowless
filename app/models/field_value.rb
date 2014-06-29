@@ -7,6 +7,7 @@ class FieldValue
   VALUES = AppConfig.fields.map{ |field| "FieldValue/#{field}_value".camelcase }
 
   embedded_in :field_container, class_name: 'FieldContainer', inverse_of: 'field_values'
+  alias :container :field_container
 
   field :_type # needs to be hard coded to be able to perform the validation to prevent instanciating an object from the base class
 
