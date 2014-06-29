@@ -19,7 +19,7 @@ class Step
   scope :with_status, ->(status) { where(name: status) }
 
   def single_initial_step
-    errors.add :initial, I18n.t('mongoid.errors.messages.taken') if flow.steps.initials.count > 1
+    errors.add :initial, I18n.t('errors.messages.taken') if flow.steps.initials.count > 1
   end
 
   def incoming_transitions
