@@ -7,9 +7,9 @@ class FieldValue
 
     delegate :multiple_email_allowed?, :default_value, to: :field_type
 
-    field     :value, type: String, pre_processed: true, default: ->{ default_value if field_container } # adding nil check against field_container due to https://github.com/mongoid/mongoid/issues/2945
+    field     :value, type: String
 
-    validates :value, format: { with: SINGLE_EMAIL_REGEXP },   unless: ->{ multiple_email_allowed? }
-    validates :value, format: { with: MULTIPLE_EMAIL_REGEXP }, if:     ->{ multiple_email_allowed? }
+    validates :value, format: { with: SINGLE_EMAIL_REGEXP },   allow_nil: true, unless: ->{ multiple_email_allowed? } # allowing nil is important in case there are no value provided (when optional)
+    validates :value, format: { with: MULTIPLE_EMAIL_REGEXP }, allow_nil: true, if:     ->{ multiple_email_allowed? } # allowing nil is important in case there are no value provided (when optional)
   end
 end

@@ -3,6 +3,7 @@ class FieldValue
   include Mongoid::Timestamps
 
   delegate :field_type_to_value, :field_type, :field_type_id, :item, :flow, to: :field_container
+  delegate :default_value, to: :field_type
 
   VALUES = AppConfig.fields.map{ |field| "FieldValue/#{field}_value".camelcase }
 
@@ -14,7 +15,7 @@ class FieldValue
   field :current, type: Boolean, default: false # need to implement a logic to identify which value is the current one (considering the versioning abilities) this is necessary to perform queries
 
   # Verifying that the FieldValue matches with the associated FieldType
-  validates :_type, inclusion: { in: proc { |v| [ v.field_type_to_value ] } }
+  validates :_type, inclusion: { in: ->{ [ field_type_to_value ] } }
   #validates :_type, acceptance: { accept: proc { |v| binding.pry; v.field_type_to_value } }
   #validates :_type, acceptance: { accept: lambda { |v| v.field_type_to_value } }
 
@@ -22,8 +23,17 @@ class FieldValue
   scope :current,    -> { where(current: true) }
 
   ## validation from the associated field_type for all the default options
-  validates :value, presence: true,               unless: proc{ |v| v.field_type.optional }
-  validate  :value_special_uniqueness_validation, if:     proc{ |v| v.field_type.uniq }
+  validates :value, presence: true,               unless: ->{ field_type.optional }
+  validate  :value_special_uniqueness_validation, if:     ->{ field_type.uniq }
+
+  # Setting the default value in a after_build callback because at the time of instanciation
+  # the object is not yet linked to the parent and therfore the default_value is not accessible
+  # TOTEST
+  after_build :set_default_value
+  # TOTEST
+  def set_default_value
+    self.value = default_value if value.nil? && default_value
+  end
 
   # value needs to be uniq only in the context of a given collection of item and only the 'current' value
   # WARNING: need to lock the object creation on a given collection to guarantee true unicity

@@ -25,7 +25,7 @@ class Item
   field :status, type: String # todo perform validation on the status with the steps associated to the Flow
 
   # verify if the status is among the available steps name
-  validates :status, inclusion: { in: proc { |i| i.valid_statuses } }
+  validates :status, inclusion: { in: ->{ valid_statuses } }
 
   def step
     flow.steps.with_status(status).first
