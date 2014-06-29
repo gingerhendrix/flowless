@@ -22,10 +22,10 @@ class Item
   scope :with_pending_reminder_for,          ->(user)          { where(:reminders.elem_match => { user_id: user.id, complete: false }) }
   scope :with_current_values_for_field_type, ->(field_type_id) { where(:field_containers.elem_match => { field_type_id: field_type_id, :'field_values.current' => true }) }
 
-  field :status, type: String # todo perform validation on the status with the steps associated to the Flow
+  field :status, type: String # TODO perform validation on the status with the steps associated to the Flow
 
   # verify if the status is among the available steps name
-  validates :status, inclusion: { in: ->{ valid_statuses } }
+  validates :status, inclusion: { in: proc { |i| i.valid_statuses } }
 
   def step
     flow.steps.with_status(status).first

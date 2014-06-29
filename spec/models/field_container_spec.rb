@@ -48,11 +48,11 @@ describe FieldContainer do
 
   context 'public methods' do
     describe 'field_value' do
-      let(:field_value_1) { FactoryGirl.build :input_value, value: '1', _type: "FieldValue::InputValue" }
+      let(:field_value_1) { FactoryGirl.build :input_value, value: '1', _type: "FieldValue::InputValue", current: true }
       let(:field_value_2) { FactoryGirl.build :input_value, value: '2', _type: "FieldValue::InputValue" }
 
       before :each do
-        field_container.stub_chain(:field_values, :versionned).and_return [ field_value_1, field_value_2 ]
+        field_container.stub(:current_values).and_return [ field_value_1, field_value_2 ]
       end
 
       it 'shoudl return the right field_value' do

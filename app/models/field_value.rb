@@ -15,7 +15,7 @@ class FieldValue
   field :current, type: Boolean, default: false # need to implement a logic to identify which value is the current one (considering the versioning abilities) this is necessary to perform queries
 
   # Verifying that the FieldValue matches with the associated FieldType
-  validates :_type, inclusion: { in: ->{ [ field_type_to_value ] } }
+  validates :_type, inclusion: { in: proc { |v| [ v.field_type_to_value ] } }
   #validates :_type, acceptance: { accept: proc { |v| binding.pry; v.field_type_to_value } }
   #validates :_type, acceptance: { accept: lambda { |v| v.field_type_to_value } }
 
