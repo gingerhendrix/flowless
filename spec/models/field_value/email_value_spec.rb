@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe FieldValue::EmailValue do
+describe FieldValue::EmailValue, :type => :model do
   let(:item)              { FactoryGirl.build :item }
   let(:field_container)   { FactoryGirl.build :field_container, item: item }
   # forced to add the _type parameters for using zeus, cf https://github.com/burke/zeus/issues/439
@@ -10,7 +10,7 @@ describe FieldValue::EmailValue do
 
   context 'building and validation on STI' do
     before :each do
-      item.flow.field_types.should_receive(:find).at_least(1).times.and_return field_type
+      expect(item.flow.field_types).to receive(:find).at_least(1).times.and_return field_type
     end
 
     describe 'email_value' do

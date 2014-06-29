@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Follower do
+describe Follower, :type => :model do
   let(:follower) { FactoryGirl.build :follower }
 
   context 'building and validation' do

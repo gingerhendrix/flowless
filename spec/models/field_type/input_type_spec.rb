@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe FieldType::InputType do
+describe FieldType::InputType, :type => :model do
   # forced to add the _type parameters for using zeus, cf https://github.com/burke/zeus/issues/439
   let(:input_type) { FactoryGirl.build :input_type, _type: 'FieldType::InputType' }
 

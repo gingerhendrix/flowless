@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "collections/index" do
+describe "collections/index", :type => :view do
   before(:each) do
     assign(:collections, Kaminari.paginate_array([
       stub_model(Collection,

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "collections/show" do
+describe "collections/show", :type => :view do
   before(:each) do
     @collection = assign(:collection, stub_model(Collection,
       :name => "Name"
@@ -10,6 +10,6 @@ describe "collections/show" do
   it "renders attributes in <p>" do
     render
     # Run the generator again with the --webrat flag if you want to use webrat matchers
-    rendered.should match(/Name/)
+    expect(rendered).to match(/Name/)
   end
 end

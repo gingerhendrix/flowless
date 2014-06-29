@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Transition do
+describe Transition, :type => :model do
   let(:transition) { FactoryGirl.build :transition }
 
   context 'building and validation' do
@@ -15,7 +15,7 @@ describe Transition do
       let(:flow) { FactoryGirl.build(:flow) }
 
       before :each do
-        transition.stub(:flow).and_return flow
+        allow(transition).to receive(:flow).and_return flow
       end
 
       describe 'source_step' do
@@ -54,8 +54,8 @@ describe Transition do
       let(:destination_step)  { OpenStruct.new(name: 'destination_step') }
 
       before :each do
-        transition.stub(:source_step).and_return source_step
-        transition.stub(:destination_step).and_return destination_step
+        allow(transition).to receive(:source_step).and_return source_step
+        allow(transition).to receive(:destination_step).and_return destination_step
       end
 
       it 'should call the name of the source_step' do

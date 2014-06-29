@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Event do
+describe Event, :type => :model do
   let(:event)       { FactoryGirl.build :event }
   let(:read_event)  { FactoryGirl.build :read_event }
 
@@ -29,8 +29,8 @@ describe Event do
       let(:event3)   { double('event3') }
 
       before :each do
-        entity.stub(:id).and_return     42
-        entity.stub(:class).and_return  Object
+        allow(entity).to receive(:id).and_return     42
+        allow(entity).to receive(:class).and_return  Object
       end
 
       it 'should create 3 news events when they are all valid' do
@@ -58,8 +58,8 @@ describe Event do
   context 'public methods' do
     describe 'get_entity' do
       it 'should call find on the proper class' do
-        event.stub(:entity_class).and_return  "User"
-        event.stub(:entity_id).and_return     69
+        allow(event).to receive(:entity_class).and_return  "User"
+        allow(event).to receive(:entity_id).and_return     69
         expect(User).to receive(:find).with(69)
         event.get_entity
       end
@@ -69,8 +69,8 @@ describe Event do
       let(:entity)   { double('entity') }
 
       before :each do
-        entity.stub(:id).and_return     21
-        entity.stub(:class).and_return  Hash
+        allow(entity).to receive(:id).and_return     21
+        allow(entity).to receive(:class).and_return  Hash
       end
 
       it 'should set id and class from the entity' do
@@ -88,7 +88,7 @@ describe Event do
 
       it 'should work' do
         read_event.read_at = now - 1.hour
-        Time.stub(:now).and_return now
+        allow(Time).to receive(:now).and_return now
         expect(read_event).to receive(:save!)
         read_event.mark_as_read!
         expect(read_event.read_at).to eq(now)

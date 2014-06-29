@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe Item do
+describe Item, :type => :model do
   let(:item) { FactoryGirl.build :item, status: 'my_status' }
 
   before :each do
-    item.stub_chain(:flow, :valid_statuses).and_return [ 'my_status', 'valid_status' ]
+    allow(item).to receive_message_chain(:flow, :valid_statuses).and_return [ 'my_status', 'valid_status' ]
   end
 
   context 'building and validation' do
@@ -28,7 +28,7 @@ describe Item do
     let(:flow) { FactoryGirl.build :flow }
 
     before :each do
-      item.stub(:flow).and_return flow
+      allow(item).to receive(:flow).and_return flow
     end
 
     describe 'step' do
@@ -59,8 +59,8 @@ describe Item do
       let(:transition)  { FactoryGirl.build(:transition) }
 
       before :each do
-        transition.stub(:destination_status).and_return 'something'
-        transition.stub(:flow).and_return OpenStruct.new(id: 42)
+        allow(transition).to receive(:destination_status).and_return 'something'
+        allow(transition).to receive(:flow).and_return OpenStruct.new(id: 42)
       end
 
       it 'should call set_status if the transition can be applied' do
@@ -86,8 +86,8 @@ describe Item do
       let(:wrong_t2)    { OpenStruct.new(source_status: 'good_status',  flow: wrong_flow) }
 
       before :each do
-        item.stub(:status).and_return 'good_status'
-        item.stub(:flow).and_return good_flow
+        allow(item).to receive(:status).and_return 'good_status'
+        allow(item).to receive(:flow).and_return good_flow
       end
 
       it 'should be false when status are different' do

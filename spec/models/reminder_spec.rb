@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Reminder do
+describe Reminder, :type => :model do
   let(:reminder)  { FactoryGirl.build :reminder }
   let(:recurring) { FactoryGirl.build(:recurring_reminder) }
 
@@ -14,7 +14,7 @@ describe Reminder do
     describe 'validation' do
       it 'should call the custom validation to set the next occurence if reccurring?' do
         expect(reminder).to receive(:calculate_next_occurence)
-        reminder.stub(:recurring?).and_return true
+        allow(reminder).to receive(:recurring?).and_return true
         reminder.valid?
       end
     end
@@ -29,7 +29,7 @@ describe Reminder do
 
       it 'should call the proper Recurrence method from the gem' do
         expect(Recurrence).to         receive(:new).and_return rec
-        rec.stub(:next).and_return    another_time
+        allow(rec).to receive(:next).and_return    another_time
         expect(reminder).to           receive(:time_of_day).and_return  17 * 3600 + 6 * 60
         reminder.calculate_next_occurence
         expect(reminder.remind_at.utc).to eq(Time.parse('2010-01-01 17:06:00 UTC'))
@@ -44,12 +44,12 @@ describe Reminder do
 
     describe 'time_of_day' do
       it 'should be 0 if there are no remind_at given' do
-        reminder.stub(:remind_at).and_return nil
+        allow(reminder).to receive(:remind_at).and_return nil
         expect(reminder.time_of_day).to eq(0)
       end
 
       it 'should return the proper time of day if remind_at is given' do
-        reminder.stub(:remind_at).and_return time
+        allow(reminder).to receive(:remind_at).and_return time
         expect(reminder.time_of_day).to eq((17 * 3600 + 6 * 60))
       end
     end

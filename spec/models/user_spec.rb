@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe User do
+describe User, :type => :model do
   let(:user) { FactoryGirl.build :user }
 
   context 'building and validation' do
@@ -13,8 +13,8 @@ describe User do
 
   context 'meta programming' do
     describe 'followed_flows, followed_items' do
-      it { user.should respond_to :followed_flows }
-      it { user.should respond_to :followed_items }
+      it { expect(user).to respond_to :followed_flows }
+      it { expect(user).to respond_to :followed_items }
     end
 
     describe 'checking the detailed behavior of followed_items' do

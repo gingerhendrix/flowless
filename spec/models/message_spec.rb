@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Message do
+describe Message, :type => :model do
   let(:message) { FactoryGirl.build :message }
 
   context 'building and validation' do

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Comment do
+describe Comment, :type => :model do
   let(:comment) { FactoryGirl.build :comment }
 
   context 'building and validation' do
@@ -17,7 +17,7 @@ describe Comment do
       let(:message_2) { FactoryGirl.build :message, content: '2' }
 
       before :each do
-        comment.stub_chain(:messages, :versionned).and_return [ message_1, message_2 ]
+        allow(comment).to receive_message_chain(:messages, :versionned).and_return [ message_1, message_2 ]
       end
 
       it 'shoudl return the right message' do
@@ -28,7 +28,7 @@ describe Comment do
     describe 'content' do
       describe 'no messages present' do
         before :each do
-          comment.stub(:message).and_return nil
+          allow(comment).to receive(:message).and_return nil
         end
 
         it 'should not raise an error and return nil' do
@@ -40,7 +40,7 @@ describe Comment do
         let(:message) { FactoryGirl.build :message, content: 'ok' }
 
         before :each do
-          comment.stub(:message).and_return message
+          allow(comment).to receive(:message).and_return message
         end
 
         it 'should return the right content' do

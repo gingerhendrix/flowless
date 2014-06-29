@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Eventable do
+describe Eventable, :type => :model do
   let (:user)       { FactoryGirl.build(:user) }
   let (:test_class) { Struct.new(:user) { include Eventable } }
   let (:entity)     { test_class.new(user) }
@@ -9,10 +9,10 @@ describe Eventable do
   context 'meta programming' do
     let(:fake_user) { double('user') }
     describe '#new_event #build_event #create_event #create_event!' do
-      it { entity.should respond_to :new_event }
-      it { entity.should respond_to :build_event }
-      it { entity.should respond_to :create_event }
-      it { entity.should respond_to :create_event! }
+      it { expect(entity).to respond_to :new_event }
+      it { expect(entity).to respond_to :build_event }
+      it { expect(entity).to respond_to :create_event }
+      it { expect(entity).to respond_to :create_event! }
 
       it 'checking the detailed behavior of the #build_event' do
         expect(user.events).to receive(:build).with(entity: entity, action: 'action', data: { lorem: 'ipsum'} )

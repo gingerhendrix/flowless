@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe FieldContainer do
+describe FieldContainer, :type => :model do
   let(:field_container) { FactoryGirl.build :field_container, field_type_id: 'random_field_type_id' }
 
   context 'building and validation' do
@@ -13,15 +13,15 @@ describe FieldContainer do
 
   context 'meta programming' do
     describe 'buid_value, new_value, create_value, create_value!' do
-      it { field_container.should respond_to :build_value }
-      it { field_container.should respond_to :new_value }
-      it { field_container.should respond_to :create_value }
-      it { field_container.should respond_to :create_value! }
+      it { expect(field_container).to respond_to :build_value }
+      it { expect(field_container).to respond_to :new_value }
+      it { expect(field_container).to respond_to :create_value }
+      it { expect(field_container).to respond_to :create_value! }
     end
 
     describe 'checking the detailed behavior of the #created_value! & #build case' do
       before :each do
-        field_container.stub(:field_type_to_value).and_return 'FieldValue::InputValue'
+        allow(field_container).to receive(:field_type_to_value).and_return 'FieldValue::InputValue'
       end
 
       it 'should work with just a value' do
@@ -30,7 +30,7 @@ describe FieldContainer do
       end
 
       it 'should work with other field also' do
-        field_container.field_values.should_receive(:build).with({ value: 'my_value', other_field: 'other_value' }, FieldValue::InputValue)
+        expect(field_container.field_values).to receive(:build).with({ value: 'my_value', other_field: 'other_value' }, FieldValue::InputValue)
         field_container.build_value('my_value', { other_field: 'other_value' })
       end
 
@@ -40,7 +40,7 @@ describe FieldContainer do
       end
 
       it 'should work with other field also' do
-        field_container.field_values.should_receive(:create!).with({ value: 'my_value', other_field: 'other_value' }, FieldValue::InputValue)
+        expect(field_container.field_values).to receive(:create!).with({ value: 'my_value', other_field: 'other_value' }, FieldValue::InputValue)
         field_container.create_value!('my_value', { other_field: 'other_value' })
       end
     end
@@ -52,7 +52,7 @@ describe FieldContainer do
       let(:field_value_2) { FactoryGirl.build :input_value, value: '2', _type: "FieldValue::InputValue" }
 
       before :each do
-        field_container.stub(:current_values).and_return [ field_value_1, field_value_2 ]
+        allow(field_container).to receive(:current_values).and_return [ field_value_1, field_value_2 ]
       end
 
       it 'shoudl return the right field_value' do
@@ -63,7 +63,7 @@ describe FieldContainer do
     describe 'current_value' do
       describe 'no values present' do
         before :each do
-          field_container.stub(:field_value).and_return nil
+          allow(field_container).to receive(:field_value).and_return nil
         end
 
         it 'should not raise an error and return nil' do
@@ -75,7 +75,7 @@ describe FieldContainer do
         let(:field_value) { FactoryGirl.build :current_input_value, value: 'ok', _type: "FieldValue::InputValue" }
 
         before :each do
-          field_container.stub(:current_field_value).and_return field_value
+          allow(field_container).to receive(:current_field_value).and_return field_value
         end
 
         it 'should return the right value' do
@@ -89,7 +89,7 @@ describe FieldContainer do
       let(:collection) { double('field_types') }
 
       before :each do
-        field_container.stub_chain(:item, :flow, :field_types).and_return(collection)
+        allow(field_container).to receive_message_chain(:item, :flow, :field_types).and_return(collection)
       end
 
       describe 'not loaded' do
@@ -98,7 +98,7 @@ describe FieldContainer do
         end
 
         it 'should load the field_type from the db' do
-          collection.should_receive(:find).once.with('random_field_type_id')
+          expect(collection).to receive(:find).once.with('random_field_type_id')
           field_container.field_type # just calling the method, results does not matter
         end
       end
@@ -109,7 +109,7 @@ describe FieldContainer do
         end
 
         it 'should return the already loaded field_type and not perform a db call' do
-          collection.should_not_receive(:find)
+          expect(collection).not_to receive(:find)
           expect(field_container.field_type).to eq(field_type)
         end
       end
@@ -117,7 +117,7 @@ describe FieldContainer do
 
     describe 'field_type_to_value' do
       before :each do
-        field_container.stub_chain(:field_type, :_type).and_return 'FieldType::MySpecialType'
+        allow(field_container).to receive_message_chain(:field_type, :_type).and_return 'FieldType::MySpecialType'
       end
 
       it 'should convert the _type of field_type to the equivalent field_value _type' do

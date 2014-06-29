@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe Collection do
+describe Collection, :type => :model do
 
 end

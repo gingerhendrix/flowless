@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Step do
+describe Step, :type => :model do
   let(:step) { FactoryGirl.build :step }
 
   context 'building and validation' do
@@ -14,7 +14,7 @@ describe Step do
     describe 'validation' do
       it 'single_initial_step' do
         step.errors.clear
-        step.stub_chain(:flow, :steps, :initials, :count).and_return 2
+        allow(step).to receive_message_chain(:flow, :steps, :initials, :count).and_return 2
         step.single_initial_step
         expect(step.errors.keys).to include(:initial)
       end
@@ -27,7 +27,7 @@ describe Step do
       let(:step2) { double('step2') }
 
       it 'should return the initial step' do
-        Step.stub(:initials).and_return [ step1, step2 ]
+        allow(Step).to receive(:initials).and_return [ step1, step2 ]
         expect(Step.initial).to be(step1)
       end
     end
@@ -38,7 +38,7 @@ describe Step do
     let(:step2) { FactoryGirl.build(:step) }
 
     before :each do
-      step.stub(:flow).and_return flow
+      allow(step).to receive(:flow).and_return flow
     end
 
     describe 'incoming_transitions' do

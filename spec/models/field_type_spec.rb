@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe FieldType do
+describe FieldType, :type => :model do
   let(:field_type_no_type) { FactoryGirl.build :field_type }
   let(:field_type)         { FactoryGirl.build :field_type, _type: FieldType::TYPES.first }
 

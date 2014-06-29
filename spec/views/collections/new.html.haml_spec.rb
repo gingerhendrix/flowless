@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "collections/new" do
+describe "collections/new", :type => :view do
   before(:each) do
     assign(:collection, stub_model(Collection,
       :name => "MyString"

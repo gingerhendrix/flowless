@@ -10,5 +10,5 @@ require 'spec_helper'
 #     end
 #   end
 # end
-describe CollectionsHelper do
+describe CollectionsHelper, :type => :helper do
 end

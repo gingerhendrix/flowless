@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Flow do
+describe Flow, :type => :model do
   let(:flow) { FactoryGirl.build :flow }
 
   context 'building and validation' do
@@ -14,7 +14,7 @@ describe Flow do
   context 'public methods' do
     describe 'valid_statuses' do
       before :each do
-        flow.stub(:steps).and_return [ OpenStruct.new(name: 'name1'), OpenStruct.new(name: 'name2') ]
+        allow(flow).to receive(:steps).and_return [ OpenStruct.new(name: 'name1'), OpenStruct.new(name: 'name2') ]
       end
 
       it 'return the valid status list' do
