@@ -31,7 +31,6 @@ class FieldContainer
   def current_field_value(options = {})
     scope    = options[:scope]
     selector = options[:selector]
-    # there is supposed to be only one current value, so using .first is supposed to be safe here
     if options[:scope]
       if (params = scope[:params] ? [*scope[:params]] : nil)
         current_values.send(scope[:name], *params)
@@ -42,7 +41,7 @@ class FieldContainer
       current_values.where(selector)
     else
       current_values
-    end.first
+    end.first # there is supposed to be only one current value, so using .first is supposed to be safe here
   end
   alias_method :field_value, :current_field_value
 

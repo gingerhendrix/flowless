@@ -9,6 +9,8 @@ class Item
   delegate :valid_statuses, to: :flow
 
   embeds_many :field_containers, class_name: 'FieldContainer', inverse_of: 'item'
+  alias :containers :field_containers
+
   embeds_many :reminders,        class_name: 'Reminder',       inverse_of: 'item'
   embeds_many :comments,         class_name: 'Comment',        inverse_of: 'item'
 
@@ -42,7 +44,7 @@ class Item
   # because we want to be easily able to list all the current field_values of an item with thinking about versionning
   # options can either be passing a selector or a scope to search directly within the field_values or influence the scopes
   # and criteria on the field_containers:
-  # i.e: options = { field_container: { scope: { name: 'some_scope', params: } }, field_value: { selector: { some: :selector} } }
+  # i.e: options = { field_container: { scope: { name: 'some_scope', params: ... } }, field_value: { selector: { some: :selector} } }
   # TOTEST
   def current_field_values(options = {})
     options.reverse_merge!(field_container: {}, field_value: {})

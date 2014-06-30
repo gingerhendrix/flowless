@@ -27,7 +27,7 @@ RSpec.configure do |config|
   config.include Devise::TestHelpers, :type => :controller
   config.include Mongoid::Matchers
   config.profile_examples = true
-  config.profile_examples = 10
+  config.profile_examples = 5
   config.infer_base_class_for_anonymous_controllers = false
   config.infer_spec_type_from_file_location!
   config.order = "default"

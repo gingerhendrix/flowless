@@ -75,6 +75,77 @@ describe Item, :type => :model do
         expect{ item.apply_transition!(transition) }.to raise_error Exceptions::InapplicableTransition
       end
     end
+
+    describe 'current_field_values' do
+      let(:criteria)      { double('criteria') }
+      let(:container1)    { FactoryGirl.build :field_container, item: item }
+      let(:container2)    { FactoryGirl.build :field_container, item: item, field_type_id: 42 }
+      let(:container3)    { FactoryGirl.build :field_container, item: item }
+      let!(:value1fromC1) { FactoryGirl.build :input_value, value: 'value1fromC1', current: true,  field_container: container1 }
+      let!(:value2fromC1) { FactoryGirl.build :input_value, value: 'value2fromC1', current: true,  field_container: container1 }
+      let!(:value3fromC1) { FactoryGirl.build :input_value, value: 'value3fromC1', current: false, field_container: container1 }
+      let!(:value1fromC2) { FactoryGirl.build :input_value, value: 'value1fromC2', current: true,  field_container: container2 }
+      let!(:value1fromC3) { FactoryGirl.build :input_value, value: 'value1fromC3', current: false, field_container: container3 }
+
+      it 'should pass field_values options down to the containers' do
+        expect(container1).to receive(:current_field_value).with(:foobar)
+        expect(container2).to receive(:current_field_value).with(:foobar)
+
+        item.current_field_values({ field_value: :foobar })
+      end
+
+      it 'should handle field_container options with scope and its name when no params are passed' do
+        expect(FieldContainer).to receive(:my_scope).with(no_args).at_least(3).times.and_return(FieldContainer.criteria)
+
+        item.current_field_values(field_container: { scope: { name: :my_scope, params: nil } })
+        item.current_field_values(field_container: { scope: { name: :my_scope, params: [] } })
+        item.current_field_values(field_container: { scope: { name: :my_scope } })
+      end
+
+      it 'should handle field_container options with scope and its name and params (one or many)' do
+        expect(FieldContainer).to receive(:my_scope).twice.with(:my_params).and_return(FieldContainer.criteria)
+        item.current_field_values(field_container: { scope: { name: :my_scope, params: :my_params } })
+        item.current_field_values(field_container: { scope: { name: :my_scope, params: [:my_params] } })
+
+        expect(FieldContainer).to receive(:my_scope).with(:p1, :p2).and_return(FieldContainer.criteria)
+        item.current_field_values(field_container: { scope: { name: :my_scope, params: [:p1, :p2] } })
+      end
+
+      it 'should handle field_container options with selector' do
+        expect(FieldContainer).to receive(:with_current_values).and_return(criteria) # have to stub this one to prevent usage of the with_current_values scope to trigget the expect below
+        expect(criteria).to receive(:where).with(:my_selector).and_return(FieldContainer.criteria)
+
+        item.current_field_values(field_container: { selector: :my_selector })
+      end
+
+      it 'should returns only the values that are current' do
+        values = item.current_field_values
+
+        expect(values).to     include value1fromC1
+        expect(values).to     include value1fromC2
+        expect(values).not_to include value3fromC1
+        expect(values).not_to include value1fromC3
+        expect(values).not_to include nil
+      end
+
+      it 'should ignore wrong options' do
+        values = item.current_field_values({ foo: :bar})
+
+        expect(values).to     include value1fromC1
+        expect(values).to     include value1fromC2
+        expect(values).not_to include value3fromC1
+        expect(values).not_to include value1fromC3
+        expect(values).not_to include nil
+      end
+
+      it 'should work on some live cases based on the factory values with selector and scope' do
+        values = item.current_field_values(field_container: { selector: { field_type_id: 42 } })
+        expect(values).to match_array [ value1fromC2 ]
+
+        values = item.current_field_values(field_container: { scope: { name: :with_field_type, params: 42 } })
+        expect(values).to match_array [ value1fromC2 ]
+      end
+    end
   end
 
   context 'private methods' do
