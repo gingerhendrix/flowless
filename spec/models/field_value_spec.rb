@@ -44,6 +44,41 @@ describe FieldValue, :type => :model do
     end
   end
 
+  context 'managing the default value' do
+    let(:field_value)     { FactoryGirl.build :field_value, field_container: field_container }
+
+    describe 'set_default_value callback' do
+      it 'should call the set_default_value method upon building the field_value' do
+        expect_any_instance_of(FieldValue).to receive(:set_default_value)
+        field_container.field_values.new
+      end
+    end
+
+    describe 'set_default_value' do
+      it 'should not set the default value if there is an existing value' do
+        expect(field_value).to receive(:value).twice.and_return 'my_value'
+        expect(field_value).to_not receive(:value=)
+        field_value.set_default_value
+        expect(field_value.value).to eq 'my_value'
+      end
+
+      it 'should not set the default value if there are no default value even tough value is nil' do
+        expect(field_value).to receive(:value).and_return nil
+        expect(field_value).to receive(:default_value).once.and_return nil
+        expect(field_value).to_not receive(:value=)
+        field_value.set_default_value
+      end
+
+      it 'should only set the default value if current value is nil' do
+        expect(field_value).to receive(:default_value).twice.and_return 'my_default_value'
+        expect(field_value).to receive(:value).once.and_return nil
+        expect(field_value).to receive(:value=).with('my_default_value')
+        field_value.set_default_value
+      end
+    end
+
+  end
+
   context 'scopes' do
     describe 'versionned' do
       it 'should have the proper criteria sort option' do
