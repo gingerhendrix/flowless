@@ -46,7 +46,7 @@ class FieldContainer
   end
   alias_method :field_value, :current_field_value
 
-  # TOFIX
+  # TOTEST
   def current_value
     current_field_value.try(:value)
   end
