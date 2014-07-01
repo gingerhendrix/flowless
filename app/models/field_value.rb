@@ -15,22 +15,23 @@ class FieldValue
   field :current, type: Boolean, default: false # need to implement a logic to identify which value is the current one (considering the versioning abilities) this is necessary to perform queries
 
   # Verifying that the FieldValue matches with the associated FieldType
-  validates :_type, inclusion: { in: proc { |v| [ v.field_type_to_value ] } }
-  #validates :_type, acceptance: { accept: proc { |v| binding.pry; v.field_type_to_value } }
+  validates :_type, inclusion: { in: ->(v) { [ v.field_type_to_value ] } }
+  #validates :_type, acceptance: { accept: ->(v) { v.field_type_to_value } }
   #validates :_type, acceptance: { accept: lambda { |v| v.field_type_to_value } }
+  # TOQUESTION why is the acceptance not working ? cf http://stackoverflow.com/questions/24500069/mongoid-validations-using-acceptance-with-a-proc-or-lambda-is-not-working-b
 
   scope :versionned, -> { desc(:_id) }
   scope :current,    -> { where(current: true) }
 
   ## validation from the associated field_type for all the default options
+  #TOTEST
   validates :value, presence: true,               unless: ->{ field_type.optional }
   validate  :value_special_uniqueness_validation, if:     ->{ field_type.uniq }
 
   # Setting the default value in a after_build callback because at the time of instanciation
   # the object is not yet linked to the parent and therfore the default_value is not accessible
-  # TOTEST
   after_build :set_default_value
-  # TOTEST
+
   def set_default_value
     self.value = default_value if value.nil? && default_value
   end

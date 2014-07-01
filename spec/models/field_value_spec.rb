@@ -1,5 +1,7 @@
 require 'spec_helper'
 
+# stub_chain #allow(field_value).to receive_message_chain(:field_type, :optional).and_return true
+
 describe FieldValue, :type => :model do
   let(:item)            { FactoryGirl.build :item }
   let(:field_container) { FactoryGirl.build :field_container, item: item }
@@ -40,6 +42,59 @@ describe FieldValue, :type => :model do
 
       it 'should be valid' do
         expect(input_value.valid?).to be_truthy
+      end
+    end
+
+    describe 'value validation of unicity if the associated field_type requires it' do
+      let(:field_value)     { FactoryGirl.build :field_value, field_container: field_container , _type: 'FieldValue::TestValue' }
+      let(:field_type)      { FactoryGirl.build :field_type, _type: 'FieldType::TestType' }
+
+      before :each do
+        allow(field_container).to receive(:field_type).and_return field_type
+      end
+
+      it 'should trigger the unicity validation if the associated field_type requires it' do
+        field_type.uniq = true
+        expect(field_value).to receive :value_special_uniqueness_validation
+        field_value.valid?
+      end
+
+      it 'should be invalid to have an empty value if the associated field_type does not have an optional presence' do
+        field_type.uniq = false
+        expect(field_value).to_not receive :value_special_uniqueness_validation
+        field_value.valid?
+      end
+    end
+
+    describe 'value validation of presence if the associated field_type requires it' do
+      let(:field_value)     { FactoryGirl.build :field_value, field_container: field_container , _type: 'FieldValue::TestValue' }
+      let(:field_type)      { FactoryGirl.build :field_type, _type: 'FieldType::TestType' }
+
+      before :each do
+        allow(field_container).to receive(:field_type).and_return field_type
+      end
+
+      it 'should be valid to have an empty value if the associated field_type has an optional presence' do
+        field_type.optional = true
+        expect(field_value.valid?).to be_truthy
+      end
+
+      it 'should be invalid to have an empty value if the associated field_type does not have an optional presence' do
+        expect(field_value).to receive(:value).twice.and_return nil
+        field_type.optional = false
+        expect(field_value.valid?).to be_falsey
+      end
+
+      it 'should be valid to have a value if the associated field_type does not have an optional presence' do
+        expect(field_value).to receive(:value).and_return 'some_value'
+        field_type.optional = false
+        expect(field_value.valid?).to be_truthy
+      end
+
+      it 'should be valid to have a value if the associated field_type does have an optional presence, it should not even check the value' do
+        expect(field_value).not_to receive(:value)
+        field_type.optional = true
+        expect(field_value.valid?).to be_truthy
       end
     end
   end
