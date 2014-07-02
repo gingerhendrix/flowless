@@ -21,8 +21,9 @@ class FieldValue
   #validates :_type, acceptance: { accept: lambda { |v| v.field_type_to_value } }
   # TOQUESTION why is the acceptance not working ? cf http://stackoverflow.com/questions/24500069/mongoid-validations-using-acceptance-with-a-proc-or-lambda-is-not-working-b
 
-  scope :versionned, -> { desc(:_id) }
-  scope :current,    -> { where(current: true) }
+  scope :versionned, ->        { desc(:_id) }
+  scope :current,    ->        { where(current: true) }
+  scope :with_value, ->(value) { where(value: value) }
 
   ## validation from the associated field_type for all the default options
   validates :value, presence: true,               unless: ->{ field_type.optional }
@@ -49,7 +50,6 @@ class FieldValue
     # first we need to get the list of all the values from all the items in the flow that are using the same field type
     # need to make sure that the current field we are checking is not part of the list (hence the reject)
     # we then "simply" need to check that the value is not part of that list of value, then we will know it is uniq
-    # TOTEST
     def current_values_of_same_field_type_from_other_items_in_the_same_flow
       flow.items.with_current_values_for_field_type(field_type_id).map do |item|
         item.current_field_values(field_container: { scope: {

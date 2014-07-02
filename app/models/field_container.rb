@@ -27,7 +27,6 @@ class FieldContainer
   # options can either be passing a selector or a scope to search directly within the field_values
   # options = { scope: { name: :my_scope, params: [ :stuff1, :stuff2 ] } } or { scope: { name: :my_scope, params: :one_stuff } }
   # or passing selector: options = { selector: { field: :value } }
-  # TOTEST
   def current_field_value(options = {})
     scope    = options[:scope]
     selector = options[:selector]
@@ -45,7 +44,6 @@ class FieldContainer
   end
   alias_method :field_value, :current_field_value
 
-  # TOTEST
   def current_value
     current_field_value.try(:value)
   end
@@ -71,6 +69,8 @@ class FieldContainer
   # @note Added a little trick to "move" the bang to the end of the method when present
   #
   # @return new methods definition
+  #
+  # TODO: add a logic to set the new value with the "current" flag and unset the previous one
   %w( new build create create! ).each do |method|
     bang = method.slice!('!')
     define_method("#{method}_value#{bang}") do |value=nil, options={}|
