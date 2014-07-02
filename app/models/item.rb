@@ -45,7 +45,6 @@ class Item
   # options can either be passing a selector or a scope to search directly within the field_values or influence the scopes
   # and criteria on the field_containers:
   # i.e: options = { field_container: { scope: { name: 'some_scope', params: ... } }, field_value: { selector: { some: :selector} } }
-  # TOTEST
   def current_field_values(options = {})
     options.reverse_merge!(field_container: {}, field_value: {})
 

@@ -41,7 +41,7 @@ class FieldContainer
       current_values.where(selector)
     else
       current_values
-    end.first # there is supposed to be only one current value, so using .first is supposed to be safe here
+    end.first # there is supposed to be only one current value, so using .first is supposed to be safe here, #TODO add validation to make sure there is only one :current value in a given object
   end
   alias_method :field_value, :current_field_value
 

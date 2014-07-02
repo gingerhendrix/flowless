@@ -16,7 +16,8 @@ class FieldValue
 
   # Verifying that the FieldValue matches with the associated FieldType
   validates :_type, inclusion: { in: ->(v) { [ v.field_type_to_value ] } }
-  #validates :_type, acceptance: { accept: ->(v) { v.field_type_to_value } }
+  #proc { |my_instance| raise my_instance.some_stuf } }
+  #validates :_type, acceptance: { accept: ->(v) { raise v.field_type_to_value } }
   #validates :_type, acceptance: { accept: lambda { |v| v.field_type_to_value } }
   # TOQUESTION why is the acceptance not working ? cf http://stackoverflow.com/questions/24500069/mongoid-validations-using-acceptance-with-a-proc-or-lambda-is-not-working-b
 
@@ -24,7 +25,6 @@ class FieldValue
   scope :current,    -> { where(current: true) }
 
   ## validation from the associated field_type for all the default options
-  #TOTEST
   validates :value, presence: true,               unless: ->{ field_type.optional }
   validate  :value_special_uniqueness_validation, if:     ->{ field_type.uniq }
 
@@ -38,7 +38,6 @@ class FieldValue
 
   # value needs to be uniq only in the context of a given collection of item and only the 'current' value
   # WARNING: need to lock the object creation on a given collection to guarantee true unicity
-  # TOTEST
   def value_special_uniqueness_validation
     if value && current_values_of_same_field_type_from_other_items_in_the_same_flow.include?(value)
       errors.add :value, I18n.t('errors.messages.taken')
