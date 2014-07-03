@@ -10,5 +10,25 @@ describe FieldType::EmailType, :type => :model do
         expect(email_type).to be_truthy
       end
     end
+
+    describe 'multiple_emails' do
+      it 'should not allow nil for that field' do
+        email_type.multiple_emails = nil
+        expect(email_type.valid?).to be_falsey
+        expect(email_type.errors[:multiple_emails]).to_not be_empty
+      end
+    end
+  end
+
+  context 'public methods' do
+    it 'should allow multiple emails the boolean field says so' do
+      email_type.multiple_emails = true
+      expect(email_type.multiple_email_allowed?).to be_truthy
+    end
+
+    it 'should not allow multiple emails the boolean field says so' do
+      email_type.multiple_emails = false
+      expect(email_type.multiple_email_allowed?).to be_falsey
+    end
   end
 end

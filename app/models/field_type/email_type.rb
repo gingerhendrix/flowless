@@ -8,11 +8,11 @@ class FieldType
 
     field     :blocked_keywords, type: Array, default: [] # email can forbide some keywords
 
-    field     :mutiple_emails, type: Boolean, default: false # can the email field contain more than one email address
-    validates :mutiple_emails, presence: true
+    field     :multiple_emails, type: Boolean, default: false # can the email field contain more than one email address
+    validates :multiple_emails, presence: true
 
     def multiple_email_allowed?
-      mutiple_emails
+      multiple_emails
     end
   end
 end
