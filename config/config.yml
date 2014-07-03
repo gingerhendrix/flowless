@@ -1,4 +1,10 @@
 defaults: &defaults
+
+  textarea_formats:
+    - text
+    - html
+    - markdown
+
   fields:
     - email
     - input
