@@ -9,7 +9,7 @@ class CustomPlan < Zeus::Rails
     FactoryGirl.reload
 
     # require all ruby files
-    Dir["#{Rails.root}/app/**/*.rb"].each { |f| load f }
+    #Dir["#{Rails.root}/app/**/*.rb"].each { |f| load f }
 
     # run the tests
     super

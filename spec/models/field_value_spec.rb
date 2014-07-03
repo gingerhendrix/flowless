@@ -78,13 +78,13 @@ describe FieldValue, :type => :model do
       end
 
       it 'should be invalid to have an empty value if the associated field_type does not have an optional presence' do
-        expect(field_value).to receive(:value).twice.and_return nil
+        expect(field_value).to receive(:value).at_least(1).times.and_return nil
         field_type.optional = false
         expect(field_value.valid?).to be_falsey
       end
 
       it 'should be valid to have a value if the associated field_type does not have an optional presence' do
-        expect(field_value).to receive(:value).and_return 'some_value'
+        expect(field_value).to receive(:value).at_least(1).times.and_return 'some_value'
         field_type.optional = false
         expect(field_value.valid?).to be_truthy
       end

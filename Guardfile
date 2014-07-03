@@ -1,6 +1,6 @@
 require 'active_support/core_ext'
 
-guard 'rspec', cmd: 'zeus rspec --color --format nested --fail-fast', all_after_pass: true do
+guard 'rspec', cmd: 'zeus rspec --color --format documentation --fail-fast', all_after_pass: true do
 
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
