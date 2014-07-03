@@ -20,22 +20,22 @@ describe FieldValue::TextareaValue, :type => :model do
     end
 
     describe 'length_constraints?' do
-      it 'should call value_length_constraints_validation if there are length_constraints?' do
+      it 'should call textarea_value_length_constraints_validation if there are length_constraints?' do
         expect(textarea_value).to receive(:length_constraints?).and_return true
-        expect(textarea_value).to receive(:value_length_constraints_validation)
+        expect(textarea_value).to receive(:textarea_value_length_constraints_validation)
         textarea_value.valid?
       end
 
-      it 'should not call value_length_constraints_validation if there are no length_constraints?' do
+      it 'should not call textarea_value_length_constraints_validation if there are no length_constraints?' do
         expect(textarea_value).to     receive(:length_constraints?).and_return false
-        expect(textarea_value).to_not receive(:value_length_constraints_validation)
+        expect(textarea_value).to_not receive(:textarea_value_length_constraints_validation)
         textarea_value.valid?
       end
 
-      it 'should not call value_length_constraints_validation if the value is blank' do
+      it 'should not call textarea_value_length_constraints_validation if the value is blank' do
         textarea_value.value = ' '
         expect(textarea_value).to     receive(:length_constraints?).and_return true
-        expect(textarea_value).to_not receive(:value_length_constraints_validation)
+        expect(textarea_value).to_not receive(:textarea_value_length_constraints_validation)
         textarea_value.valid?
       end
     end
@@ -74,7 +74,7 @@ describe FieldValue::TextareaValue, :type => :model do
   end
 
   context 'public methods' do
-    describe 'value_length_constraints_validation' do
+    describe 'textarea_value_length_constraints_validation' do
       before :each do
         allow(textarea_value).to receive(:length_constraints?).at_least(1).times.and_return true
       end
@@ -84,49 +84,49 @@ describe FieldValue::TextareaValue, :type => :model do
 
         allow(textarea_value).to receive(:min_char_count).times.and_return 0
         allow(textarea_value).to receive(:max_char_count).times.and_return 100
-        expect(textarea_value.value_length_constraints_validation).to_not eq false
+        expect(textarea_value.textarea_value_length_constraints_validation).to_not eq false
         expect(textarea_value.errors[:value]).to be_empty
 
         textarea_value.errors.clear
 
         allow(textarea_value).to receive(:min_char_count).times.and_return 10
         allow(textarea_value).to receive(:max_char_count).times.and_return 100
-        expect(textarea_value.value_length_constraints_validation).to_not eq false
+        expect(textarea_value.textarea_value_length_constraints_validation).to_not eq false
         expect(textarea_value.errors[:value]).to_not be_empty
 
         textarea_value.errors.clear
 
         allow(textarea_value).to receive(:min_char_count).times.and_return 9
         allow(textarea_value).to receive(:max_char_count).times.and_return 9
-        expect(textarea_value.value_length_constraints_validation).to_not eq false
+        expect(textarea_value.textarea_value_length_constraints_validation).to_not eq false
         expect(textarea_value.errors[:value]).to be_empty
 
         textarea_value.errors.clear
 
         allow(textarea_value).to receive(:min_char_count).times.and_return nil
         allow(textarea_value).to receive(:max_char_count).times.and_return 8
-        expect(textarea_value.value_length_constraints_validation).to_not eq false
+        expect(textarea_value.textarea_value_length_constraints_validation).to_not eq false
         expect(textarea_value.errors[:value]).to_not be_empty
 
         textarea_value.errors.clear
 
         allow(textarea_value).to receive(:min_char_count).times.and_return 10
         allow(textarea_value).to receive(:max_char_count).times.and_return nil
-        expect(textarea_value.value_length_constraints_validation).to_not eq false
+        expect(textarea_value.textarea_value_length_constraints_validation).to_not eq false
         expect(textarea_value.errors[:value]).to_not be_empty
 
         textarea_value.errors.clear
 
         allow(textarea_value).to receive(:min_char_count).times.and_return 5
         allow(textarea_value).to receive(:max_char_count).times.and_return nil
-        expect(textarea_value.value_length_constraints_validation).to_not eq false
+        expect(textarea_value.textarea_value_length_constraints_validation).to_not eq false
         expect(textarea_value.errors[:value]).to be_empty
 
         textarea_value.errors.clear
 
         allow(textarea_value).to receive(:min_char_count).times.and_return nil
         allow(textarea_value).to receive(:max_char_count).times.and_return 10
-        expect(textarea_value.value_length_constraints_validation).to_not eq false
+        expect(textarea_value.textarea_value_length_constraints_validation).to_not eq false
         expect(textarea_value.errors[:value]).to be_empty
       end
     end

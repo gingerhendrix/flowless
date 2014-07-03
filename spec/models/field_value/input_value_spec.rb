@@ -20,22 +20,22 @@ describe FieldValue::InputValue, :type => :model do
     end
 
     describe 'length_constraints?' do
-      it 'should call value_length_constraints_validation if there are length_constraints?' do
+      it 'should call input_value_length_constraints_validation if there are length_constraints?' do
         expect(input_value).to receive(:length_constraints?).and_return true
-        expect(input_value).to receive(:value_length_constraints_validation)
+        expect(input_value).to receive(:input_value_length_constraints_validation)
         input_value.valid?
       end
 
-      it 'should not call value_length_constraints_validation if there are no length_constraints?' do
+      it 'should not call input_value_length_constraints_validation if there are no length_constraints?' do
         expect(input_value).to     receive(:length_constraints?).and_return false
-        expect(input_value).to_not receive(:value_length_constraints_validation)
+        expect(input_value).to_not receive(:input_value_length_constraints_validation)
         input_value.valid?
       end
 
-      it 'should not call value_length_constraints_validation if the value is blank' do
+      it 'should not call input_value_length_constraints_validation if the value is blank' do
         input_value.value = ' '
         expect(input_value).to     receive(:length_constraints?).and_return true
-        expect(input_value).to_not receive(:value_length_constraints_validation)
+        expect(input_value).to_not receive(:input_value_length_constraints_validation)
         input_value.valid?
       end
     end
@@ -74,7 +74,7 @@ describe FieldValue::InputValue, :type => :model do
   end
 
   context 'public methods' do
-    describe 'value_length_constraints_validation' do
+    describe 'input_value_length_constraints_validation' do
       before :each do
         allow(input_value).to receive(:length_constraints?).at_least(1).times.and_return true
       end
@@ -84,49 +84,49 @@ describe FieldValue::InputValue, :type => :model do
 
         allow(input_value).to receive(:min_char_count).times.and_return 0
         allow(input_value).to receive(:max_char_count).times.and_return 100
-        expect(input_value.value_length_constraints_validation).to_not eq false
+        expect(input_value.input_value_length_constraints_validation).to_not eq false
         expect(input_value.errors[:value]).to be_empty
 
         input_value.errors.clear
 
         allow(input_value).to receive(:min_char_count).times.and_return 10
         allow(input_value).to receive(:max_char_count).times.and_return 100
-        expect(input_value.value_length_constraints_validation).to_not eq false
+        expect(input_value.input_value_length_constraints_validation).to_not eq false
         expect(input_value.errors[:value]).to_not be_empty
 
         input_value.errors.clear
 
         allow(input_value).to receive(:min_char_count).times.and_return 9
         allow(input_value).to receive(:max_char_count).times.and_return 9
-        expect(input_value.value_length_constraints_validation).to_not eq false
+        expect(input_value.input_value_length_constraints_validation).to_not eq false
         expect(input_value.errors[:value]).to be_empty
 
         input_value.errors.clear
 
         allow(input_value).to receive(:min_char_count).times.and_return nil
         allow(input_value).to receive(:max_char_count).times.and_return 8
-        expect(input_value.value_length_constraints_validation).to_not eq false
+        expect(input_value.input_value_length_constraints_validation).to_not eq false
         expect(input_value.errors[:value]).to_not be_empty
 
         input_value.errors.clear
 
         allow(input_value).to receive(:min_char_count).times.and_return 10
         allow(input_value).to receive(:max_char_count).times.and_return nil
-        expect(input_value.value_length_constraints_validation).to_not eq false
+        expect(input_value.input_value_length_constraints_validation).to_not eq false
         expect(input_value.errors[:value]).to_not be_empty
 
         input_value.errors.clear
 
         allow(input_value).to receive(:min_char_count).times.and_return 5
         allow(input_value).to receive(:max_char_count).times.and_return nil
-        expect(input_value.value_length_constraints_validation).to_not eq false
+        expect(input_value.input_value_length_constraints_validation).to_not eq false
         expect(input_value.errors[:value]).to be_empty
 
         input_value.errors.clear
 
         allow(input_value).to receive(:min_char_count).times.and_return nil
         allow(input_value).to receive(:max_char_count).times.and_return 10
-        expect(input_value.value_length_constraints_validation).to_not eq false
+        expect(input_value.input_value_length_constraints_validation).to_not eq false
         expect(input_value.errors[:value]).to be_empty
       end
     end
