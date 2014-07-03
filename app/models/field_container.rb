@@ -30,12 +30,8 @@ class FieldContainer
   def current_field_value(options = {})
     scope    = options[:scope]
     selector = options[:selector]
-    if options[:scope]
-      if (params = scope[:params] ? [*scope[:params]] : nil)
-        current_values.send(scope[:name], *params)
-      else
-        current_values.send(scope[:name])
-      end
+    if scope
+      current_values.send(scope[:name], *scope.fetch(:params, nil))
     elsif selector
       current_values.where(selector)
     else

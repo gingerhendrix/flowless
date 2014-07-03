@@ -54,11 +54,7 @@ class Item
     containers = field_containers.with_current_values
 
     if scope
-      if (params = scope[:params] ? [*scope[:params]] : nil)
-        containers.send(scope[:name], *params)
-      else
-        containers.send(scope[:name])
-      end
+      containers.send(scope[:name], *scope.fetch(:params, nil))
     elsif selector
       containers.where(selector)
     else
