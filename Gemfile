@@ -20,11 +20,12 @@ gem 'dalli',            '~> 2.7'   # works with memcachier to handle caching
 gem 'localeapp',        '~> 0.8'   # I18n translation backend
 gem 'github-markdown',  '~> 0.6'   # Interprets github markdown
 gem 'newrelic_rpm',     '~> 3.9'   # monitoring on newrelic
-gem 'simple_form',      '~> 3.1.0.rc1', github: 'plataformatec/simple_form', branch: 'master'   # helps creates form easier
+gem 'simple_form',      '~> 3.1.0.rc1' # helps creates form easier
 gem 'devise',           '~> 3.2'   # authentication handling
 gem 'cancan',           '~> 1.6'   # access right management
 gem 'hashugar',         '~> 0.0.6' # allows for nice access to hashes
 gem 'turbolinks',       '~> 2.2'   # allows not to realod the entire page with CSS and JS
+gem 'base_presenter',   '~> 0.1.0' # adding presenter abilities
 
 gem 'omniauth',         '~> 1.2'   # handles omniauth authentication
 gem 'omniauth-facebook','~> 1.6'   # works with omniauth to authenticate with facebook

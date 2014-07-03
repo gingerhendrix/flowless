@@ -8,3 +8,4 @@ flowless
 [ ![Codeship Status for omniless/flowless](https://www.codeship.io/projects/af60f040-e224-0131-5932-1e7d1ef3bae4/status?branch=master)](https://www.codeship.io/projects/25280)
 [![Code Climate](https://codeclimate.com/github/omniless/flowless.png)](https://codeclimate.com/github/omniless/flowless)
 [![Coverage Status](https://coveralls.io/repos/omniless/flowless/badge.png)](https://coveralls.io/r/omniless/flowless)
+[![Dependency Status](https://gemnasium.com/omniless/flowless.png)](https://gemnasium.com/omniless/flowless)

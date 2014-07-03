@@ -1,12 +1,3 @@
-GIT
-  remote: git://github.com/plataformatec/simple_form.git
-  revision: 3c228defb57d65ddcae370088a0ef85e05cd8376
-  branch: master
-  specs:
-    simple_form (3.1.0.rc1)
-      actionpack (~> 4.0)
-      activemodel (~> 4.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -37,6 +28,7 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
+    base_presenter (0.1.0)
     bcrypt (3.1.7)
     better_errors (1.1.0)
       coderay (>= 1.0.0)
@@ -271,6 +263,9 @@ GEM
       sprockets (~> 2.8, <= 2.11.0)
       sprockets-rails (~> 2.0)
     sexp_processor (4.4.3)
+    simple_form (3.1.0.rc1)
+      actionpack (~> 4.0)
+      activemodel (~> 4.0)
     simplecov (0.8.2)
       docile (~> 1.1.0)
       multi_json
@@ -314,6 +309,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  base_presenter (~> 0.1.0)
   better_errors
   binding_of_caller
   bootstrap-sass (~> 3.1)
@@ -352,7 +348,7 @@ DEPENDENCIES
   rspec-activemodel-mocks
   rspec-rails
   sass-rails (~> 4.0)
-  simple_form (~> 3.1.0.rc1)!
+  simple_form (~> 3.1.0.rc1)
   simplecov
   terminal-notifier-guard
   turbolinks (~> 2.2)
