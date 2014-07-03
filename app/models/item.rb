@@ -65,6 +65,11 @@ class Item
   end
   alias_method :values, :current_field_values
 
+  # listing all the current values from a particular field_type_id
+  def current_field_values_with_field_type_id(field_type_id)
+    current_field_values(field_container: { scope: { name: 'with_field_type', params: field_type_id } })
+  end
+
   def apply_transition!(transition)
     if can_apply_transition?(transition)
       set_status!(transition.destination_status)

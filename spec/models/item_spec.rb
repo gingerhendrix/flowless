@@ -146,6 +146,20 @@ describe Item, :type => :model do
         expect(values).to match_array [ value1fromC2 ]
       end
     end
+
+    describe 'current_field_values_with_field_type_id' do
+      let!(:field_container1) { FactoryGirl.build :field_container, item: item, field_type_id: 'my_field_type_id' }
+      let!(:value1)           { FactoryGirl.build :field_value, field_container: field_container1, current: true }
+      let!(:value3)           { FactoryGirl.build :field_value, field_container: field_container1, current: false }
+
+      let!(:field_container2) { FactoryGirl.build :field_container, item: item, field_type_id: 'some_other_field_type_id' }
+      let!(:value2)           { FactoryGirl.build :field_value, field_container: field_container2, current: true }
+
+      it 'should call the proper scope with params on the current field values' do
+        expect(FieldContainer).to receive(:with_field_type).once.with('my_field_type_id').and_call_original
+        item.current_field_values_with_field_type_id('my_field_type_id')
+      end
+    end
   end
 
   context 'private methods' do

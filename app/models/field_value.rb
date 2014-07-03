@@ -51,10 +51,8 @@ class FieldValue
     # need to make sure that the current field we are checking is not part of the list (hence the reject)
     # we then "simply" need to check that the value is not part of that list of value, then we will know it is uniq
     def current_values_of_same_field_type_from_other_items_in_the_same_flow
-      flow.items.with_current_values_for_field_type(field_type_id).map do |item|
-        item.current_field_values(field_container: { scope: {
-          name: 'with_field_type',
-          params: field_type_id } }).reject{ |field_value| field_value._id == _id }.map(&:value)
-      end.flatten
+      flow.items.with_current_values_for_field_type(field_type_id).flat_map do |item|
+        item.current_field_values_with_field_type_id(field_type_id).reject{ |field_value| field_value._id == _id }.map(&:value)
+      end
     end
 end
