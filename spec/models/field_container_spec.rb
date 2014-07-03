@@ -8,6 +8,11 @@ describe FieldContainer, :type => :model do
       it 'should build successfully and be invalid' do
         expect(field_container.valid?).to be_falsey
       end
+
+      it 'should be valid with the correct information' do
+        field_container.item = Item.new
+        expect(field_container.valid?).to be_truthy
+      end
     end
   end
 
