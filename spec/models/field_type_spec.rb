@@ -29,4 +29,18 @@ describe FieldType, :type => :model do
       end
     end
   end
+
+  context 'public methods' do
+    describe 'uniq?' do
+      it 'should be uniq?' do
+        field_type.uniq = true
+        expect(field_type.uniq?).to be_truthy
+      end
+
+      it 'should not be uniq?' do
+        field_type.uniq = false
+        expect(field_type.uniq?).to be_falsey
+      end
+    end
+  end
 end

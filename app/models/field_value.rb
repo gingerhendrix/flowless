@@ -3,7 +3,7 @@ class FieldValue
   include Mongoid::Timestamps
 
   delegate :field_type_to_value, :field_type, :field_type_id, :item, :flow, to: :field_container
-  delegate :default_value, to: :field_type
+  delegate :default_value, :uniq?, :optional?, to: :field_type
 
   VALUES = AppConfig.fields.map{ |field| "FieldValue/#{field}_value".camelcase }
 
@@ -26,8 +26,8 @@ class FieldValue
   scope :with_value, ->(value) { where(value: value) }
 
   ## validation from the associated field_type for all the default options
-  validates :value, presence: true,               unless: ->{ field_type.optional }
-  validate  :value_special_uniqueness_validation, if:     ->{ field_type.uniq }
+  validates :value, presence: true,               unless: ->{ optional? }
+  validate  :value_special_uniqueness_validation, if:     ->{ uniq? }
 
   # Setting the default value in a after_build callback because at the time of instanciation
   # the object is not yet linked to the parent and therfore the default_value is not accessible

@@ -52,7 +52,7 @@ describe FieldValue::EmailValue, :type => :model do
 
     describe 'when multiple_email_allowed is not allowed' do
       before :each do
-        expect(email_value).to receive(:multiple_email_allowed?).at_least(1).times.and_return false
+        expect(email_value).to receive(:multiple_emails?).at_least(1).times.and_return false
       end
 
       it 'should allow one single email to be valid' do
@@ -79,7 +79,7 @@ describe FieldValue::EmailValue, :type => :model do
 
     describe 'when multiple_email_allowed is allowed' do
       before :each do
-        expect(email_value).to receive(:multiple_email_allowed?).at_least(1).times.and_return true
+        expect(email_value).to receive(:multiple_emails?).at_least(1).times.and_return true
       end
 
       it 'should allow one single email to be valid' do
