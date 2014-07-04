@@ -1,5 +1,5 @@
 class FieldTypePresenter < ApplicationPresenter
   presents :field_type
 
-  # delegete :name
+  # delegete :name, to: field_type
 end

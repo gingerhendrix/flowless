@@ -8,7 +8,7 @@ gem 'sass-rails',       '~> 4.0'   # brings sass support
 gem 'coffee-rails',     '~> 4.0'   # brings coffee support
 gem 'jquery-rails',     '~> 3.1'   # brings jQuery support
 gem 'haml-rails',       '~> 0.5'   # brings Haml support
-gem 'bootstrap-sass',   '~> 3.1'   # adds the bootstrap framework
+gem 'bootstrap-sass',   '~> 3.2'   # adds the bootstrap framework
 gem 'uglifier',         '~> 2.5'   # compressed and uglify JS
 gem 'darwinjs-rails',   '~> 1.2'   # MV object framework on top of jQuery
 #gem 'foreman',          '~> 0.74'  # simulate the production env with the different processes
