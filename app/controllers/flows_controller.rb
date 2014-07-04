@@ -13,6 +13,9 @@ class FlowsController < ApplicationController
   # GET /flows/new
   def new
     @flow = Flow.new
+    @flow.field_types.build({}, FieldType::EmailType)
+    @flow.field_types.build({}, FieldType::InputType)
+    @flow.field_types.build({}, FieldType::TextareaType)
   end
 
   # GET /flows/1/edit
@@ -21,7 +24,7 @@ class FlowsController < ApplicationController
 
   # POST /flows
   def create
-    @flow = Flow.new(flow_params)
+    @flow = current_user.flows.new(flow_params)
 
     if @flow.save
       redirect_to @flow, notice: 'Flow was successfully created.'
@@ -53,6 +56,7 @@ class FlowsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def flow_params
-      params[:flow]
+      params.require(:flow).permit(:name)
+      #params.require(:user).permit(:username, :email, :password, :salt, :encrypted_password)
     end
 end

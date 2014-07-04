@@ -4,6 +4,8 @@ class Flow
   include Followable
 
   embeds_many :field_types, class_name: 'FieldType',  inverse_of: 'flow'
+  accepts_nested_attributes_for :field_types, allow_destroy: true#, reject_if: ->(attributes) { attributes['xx'].blank? }
+
   embeds_many :steps,       class_name: 'Step',       inverse_of: 'flow'
   embeds_many :transitions, class_name: 'Transition', inverse_of: 'flow'
 
