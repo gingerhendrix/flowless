@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Step, :type => :model do
   let(:step) { FactoryGirl.build :step }

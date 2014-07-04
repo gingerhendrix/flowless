@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe "collections/show", :type => :view do
   before(:each) do

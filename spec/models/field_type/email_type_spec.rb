@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe FieldType::EmailType, :type => :model do
   # forced to add the _type parameters for using zeus, cf https://github.com/burke/zeus/issues/439

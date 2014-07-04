@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe FieldContainer, :type => :model do
   let(:field_container) { FactoryGirl.build :field_container, field_type_id: 'random_field_type_id' }

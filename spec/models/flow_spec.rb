@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Flow, :type => :model do
   let(:flow) { FactoryGirl.build :flow }

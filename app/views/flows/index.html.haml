@@ -1,0 +1,20 @@
+.page-header
+  = link_to new_flow_path, :class => 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New Flow
+  %h2 Listing flows
+
+.table-responsive
+  %table.table.table-hover.table-condensed
+    %thead
+      %tr
+        %th
+        %th
+        %th
+
+    %tbody
+      - @flows.each do |flow|
+        %tr
+          %td
+            = link_to 'Edit', edit_flow_path(flow), :class => 'btn btn-xs btn-primary'
+            = link_to 'Destroy', flow, :data => { confirm: 'Are you sure?' }, :method => :delete, :class => 'btn btn-xs btn-danger'

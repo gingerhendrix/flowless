@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe FieldValue::InputValue, :type => :model do
   let(:item)             { FactoryGirl.build :item }

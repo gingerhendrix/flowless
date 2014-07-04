@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Reminder, :type => :model do
   let(:reminder)  { FactoryGirl.build :reminder }

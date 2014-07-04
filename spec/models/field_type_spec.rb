@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe FieldType, :type => :model do
   let(:field_type_no_type) { FactoryGirl.build :field_type }

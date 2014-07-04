@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Followable, :type => :model do
   let(:test_class) { Class.new { include Followable, Mongoid::Document } }

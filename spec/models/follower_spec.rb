@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Follower, :type => :model do
   let(:follower) { FactoryGirl.build :follower }

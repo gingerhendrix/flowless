@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe "Collections", :type => :request do
   describe "GET /collections" do

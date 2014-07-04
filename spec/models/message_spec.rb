@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Message, :type => :model do
   let(:message) { FactoryGirl.build :message }
