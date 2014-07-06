@@ -10,5 +10,14 @@ class FieldType
 
     field     :multiple_emails, type: Boolean, default: false # can the email field contain more than one email address
     validates :multiple_emails, presence: true
+
+    def blocked_keywords
+      self[:blocked_keywords].join(', ')
+    end
+
+    def block_keywords=(value)
+      self[:blocked_keywords] = value.split(',').map(&:strip)
+    end
+
   end
 end

@@ -15,6 +15,7 @@
 #= require turbolinks
 #= require darwin
 #= require bootstrap
+#= require cocoon
 #= require_tree .
 
 $(->

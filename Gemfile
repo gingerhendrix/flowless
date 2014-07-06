@@ -21,6 +21,8 @@ gem 'localeapp',        '~> 0.8'   # I18n translation backend
 gem 'github-markdown',  '~> 0.6'   # Interprets github markdown
 gem 'newrelic_rpm',     '~> 3.9'   # monitoring on newrelic
 gem 'simple_form',      '~> 3.1.0.rc1' # helps creates form easier
+#gem 'nested_form',      '~> 0.3'   # allow for dynamic management of form with nested documents
+gem 'cocoon',           '~> 1.2'   # allow for dynamic management of form with nested documents
 gem 'devise',           '~> 3.2'   # authentication handling
 gem 'cancan',           '~> 1.6'   # access right management
 gem 'hashugar',         '~> 0.0.6' # allows for nice access to hashes

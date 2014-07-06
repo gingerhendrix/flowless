@@ -1,0 +1,8 @@
+.panel.panel-default
+  .panel-heading
+    %h3.panel-title= f.object.class.name
+  .panel-body
+    = render partial: "/flows/#{f.object.class.name.underscore}", object: f
+
+    %p
+      = link_to_remove_association "Remove field", f

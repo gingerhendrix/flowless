@@ -1,16 +1,24 @@
-= simple_form_for(@flow) do |f|
+/= simple_nested_form_for(@flow) do |f|
+= simple_form_for @flow do |f|
   = f.error_notification
 
   .form-inputs
 
     = f.input :name
 
-    = f.simple_fields_for :field_types do |t|
-      .panel.panel-default
-        .panel-heading
-          %h3.panel-title= t.object._type
-        .panel-body
-          = t.input :name
+    = f.input :description, as: :text
+
+    = f.input :help_info, as: :text
+
+    %p
+      = link_to_add_association 'Add an EmailField',   f, :field_types, :wrap_object => Proc.new { |field| field = FieldType::EmailType.new }, data: { :'association-insertion-node' => '.field_type_list'}
+    %p
+      = link_to_add_association 'Add an InputField',   f, :field_types, :wrap_object => Proc.new { |field| field = FieldType::InputType.new }, data: { :'association-insertion-node' => '.field_type_list'}
+    %p
+      = link_to_add_association 'Add a TextareaField', f, :field_types, :wrap_object => Proc.new { |field| field = FieldType::TextareaType.new }, data: { :'association-insertion-node' => '.field_type_list'}
+
+    .field_type_list
+      = f.simple_fields_for :field_types
 
   .form-actions
     = f.button :submit

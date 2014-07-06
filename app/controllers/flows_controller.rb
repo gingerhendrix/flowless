@@ -13,9 +13,9 @@ class FlowsController < ApplicationController
   # GET /flows/new
   def new
     @flow = Flow.new
-    @flow.field_types.build({}, FieldType::EmailType)
-    @flow.field_types.build({}, FieldType::InputType)
-    @flow.field_types.build({}, FieldType::TextareaType)
+    #@flow.field_types.build({ index: 0 }, FieldType::EmailType)
+    #@flow.field_types.build({ index: 1 }, FieldType::InputType)
+    #@flow.field_types.build({ index: 2 }, FieldType::TextareaType)
   end
 
   # GET /flows/1/edit
@@ -56,7 +56,6 @@ class FlowsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def flow_params
-      params.require(:flow).permit(:name)
-      #params.require(:user).permit(:username, :email, :password, :salt, :encrypted_password)
+      params.require(:flow).permit(:name, :help_info, :description, field_types_attributes: [ :id, :name, :_destroy ])
     end
 end
