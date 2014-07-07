@@ -12,12 +12,23 @@
 
 #= require jquery
 #= require jquery_ujs
+#= require jquery.turbolinks
 #= require turbolinks
-#= require darwin
 #= require bootstrap
 #= require cocoon
+#= require darwin
+#= require bootstrap-select
+#= require_tree ./views
+#= require_tree ./controllers
 #= require_tree .
 
 $(->
   Darwin.Loader.run()
+  AppInit.bootstrap_select()
 )
+
+@AppInit =
+  bootstrap_select: ->
+    $('select.form-control').selectpicker().removeClass('form-control') # using the default bootstrap 'form-control' class to have a nice fallback if somehow JS fails to load
+    $('.bootstrap-select.form-control').removeClass('form-control')     # remove the lingering form-control that got brought over during the selectpicker() initialization
+

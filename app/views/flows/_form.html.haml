@@ -1,24 +1,25 @@
-/= simple_nested_form_for(@flow) do |f|
-= simple_form_for @flow do |f|
+= simple_form_for @flow, html: { data: { module: 'Flows.Form' } } do |f|
   = f.error_notification
 
   .form-inputs
-
     = f.input :name
-
     = f.input :description, as: :text
-
     = f.input :help_info, as: :text
 
-    %p
-      = link_to_add_association 'Add an EmailField',   f, :field_types, :wrap_object => Proc.new { |field| field = FieldType::EmailType.new }, data: { :'association-insertion-node' => '.field_type_list'}
-    %p
-      = link_to_add_association 'Add an InputField',   f, :field_types, :wrap_object => Proc.new { |field| field = FieldType::InputType.new }, data: { :'association-insertion-node' => '.field_type_list'}
-    %p
-      = link_to_add_association 'Add a TextareaField', f, :field_types, :wrap_object => Proc.new { |field| field = FieldType::TextareaType.new }, data: { :'association-insertion-node' => '.field_type_list'}
-
     .field_type_list
-      = f.simple_fields_for :field_types
+      = f.simple_fields_for :field_types if f.object.field_types.empty?
+
+    .add_field_types.form-inline
+      .form-group
+        %p
+          = select_tag :field_type_list, options_for_select(FieldType::TYPES.map{ |t| [t.split('::').last.gsub('Type', ''), t.gsub('::', '_')] }, ), prompt: 'Select a field type', class: 'form-control', data: { style: 'btn-default' }
+          %button.btn.btn-primary#add-field-button{ type: 'button'}
+            %span.glyphicon.glyphicon-plus
+            = 'Add a field'
+
+      .hidden
+        - FieldType::TYPES.each do |field_type|
+          = link_to_add_association "Add a #{field_type}", f, :field_types, :wrap_object => ->(o){ o = field_type.constantize.new }, data: { :'association-insertion-node' => '.field_type_list'}, id: field_type.gsub('::', '_')
 
   .form-actions
     = f.button :submit

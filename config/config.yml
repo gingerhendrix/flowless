@@ -15,9 +15,9 @@ defaults: &defaults
     - checkbox
     - number
     - datetime
-    - file
-    - user
-    - objectlink
+    # - file
+    # - user
+    # - objectlink
 
   roles:
     - admin

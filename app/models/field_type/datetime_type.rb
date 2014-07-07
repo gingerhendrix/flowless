@@ -1,5 +1,5 @@
 class FieldType
-  class DateTimeType < ::FieldType
+  class DatetimeType < ::FieldType
 
   end
 end

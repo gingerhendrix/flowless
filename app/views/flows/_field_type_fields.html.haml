@@ -1,7 +1,8 @@
-.panel.panel-default
+.panel.panel-default.nested-fields
   .panel-heading
     %h3.panel-title= f.object.class.name
   .panel-body
+    = f.hidden_field :_type, value: f.object.class.name
     = render partial: "/flows/#{f.object.class.name.underscore}", object: f
 
     %p

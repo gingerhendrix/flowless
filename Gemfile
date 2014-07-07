@@ -11,7 +11,6 @@ gem 'haml-rails',       '~> 0.5'   # brings Haml support
 gem 'bootstrap-sass',   '~> 3.2'   # adds the bootstrap framework
 gem 'uglifier',         '~> 2.5'   # compressed and uglify JS
 gem 'darwinjs-rails',   '~> 1.2'   # MV object framework on top of jQuery
-#gem 'foreman',          '~> 0.74'  # simulate the production env with the different processes
 gem 'puma',             '~> 2.8'   # webserver
 gem 'recurrence',       '~> 1.3'   # handles recurrence to manage events
 gem 'kaminari',         '~> 0.16'  # handles pagination
@@ -21,13 +20,15 @@ gem 'localeapp',        '~> 0.8'   # I18n translation backend
 gem 'github-markdown',  '~> 0.6'   # Interprets github markdown
 gem 'newrelic_rpm',     '~> 3.9'   # monitoring on newrelic
 gem 'simple_form',      '~> 3.1.0.rc1' # helps creates form easier
-#gem 'nested_form',      '~> 0.3'   # allow for dynamic management of form with nested documents
 gem 'cocoon',           '~> 1.2'   # allow for dynamic management of form with nested documents
 gem 'devise',           '~> 3.2'   # authentication handling
 gem 'cancan',           '~> 1.6'   # access right management
 gem 'hashugar',         '~> 0.0.6' # allows for nice access to hashes
+gem 'jquery-turbolinks','~> 2.0'   # for the ability to use jquery load with turbolinks
 gem 'turbolinks',       '~> 2.2'   # allows not to realod the entire page with CSS and JS
 gem 'base_presenter',   '~> 0.1.0' # adding presenter abilities
+
+gem 'bootstrap-select-rails', '~> 1.3' # adds the assets for bootstrap-select
 
 gem 'omniauth',         '~> 1.2'   # handles omniauth authentication
 gem 'omniauth-facebook','~> 1.6'   # works with omniauth to authenticate with facebook

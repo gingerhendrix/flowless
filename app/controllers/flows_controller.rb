@@ -24,6 +24,7 @@ class FlowsController < ApplicationController
 
   # POST /flows
   def create
+    binding.pry
     @flow = current_user.flows.new(flow_params)
 
     if @flow.save
@@ -56,6 +57,6 @@ class FlowsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def flow_params
-      params.require(:flow).permit(:name, :help_info, :description, field_types_attributes: [ :id, :name, :_destroy ])
+      params.require(:flow).permit(:name, :help_info, :description, field_types_attributes: [ :id, :name, :_destroy, :_type ])
     end
 end
