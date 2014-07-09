@@ -7,12 +7,13 @@
     = f.input :help_info, as: :text
 
     .field_type_list
-      = f.simple_fields_for :field_types if f.object.field_types.empty?
+      = f.simple_fields_for :field_types do |t|
+        = render partial: '/flows/field_type_fields', locals: { f: t }
 
     .add_field_types.form-inline
       .form-group
         %p
-          = select_tag :field_type_list, options_for_select(FieldType::TYPES.map{ |t| [t.split('::').last.gsub('Type', ''), t.gsub('::', '_')] }, ), prompt: 'Select a field type', class: 'form-control', data: { style: 'btn-default' }
+          = select_tag :field_type_list, options_for_select(FieldType::TYPES.map{ |t| [t.split('::').last.gsub('Type', ''), t.gsub('::', '_')] }, ), prompt: 'Select a field type', class: 'form-control'
           %button.btn.btn-primary#add-field-button{ type: 'button'}
             %span.glyphicon.glyphicon-plus
             = 'Add a field'

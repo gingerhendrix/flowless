@@ -1,1 +1,9 @@
 = input_type.input :name
+= input_type.input :label
+= input_type.input :placeholder
+= input_type.input :help_info,       as: :text
+= input_type.input :validation_regexp
+= input_type.input :default_value
+= input_type.input :min_char_count,  as: :integer
+= input_type.input :max_char_count,  as: :integer
+= input_type.input :masked,          as: :boolean, wrapper: :vertical_boolean

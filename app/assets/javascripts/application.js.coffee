@@ -12,6 +12,7 @@
 
 #= require jquery
 #= require jquery_ujs
+# require jquery-ui   # commented out for now
 #= require jquery.turbolinks
 #= require turbolinks
 #= require bootstrap
@@ -29,6 +30,8 @@ $(->
 
 @AppInit =
   bootstrap_select: ->
-    $('select.form-control').selectpicker().removeClass('form-control') # using the default bootstrap 'form-control' class to have a nice fallback if somehow JS fails to load
-    $('.bootstrap-select.form-control').removeClass('form-control')     # remove the lingering form-control that got brought over during the selectpicker() initialization
+    $("select.form-control:not([data-style])").data('style', 'btn-default')       # look for all select that do not specify a style and apply the default one
+    $("select.form-control:not([data-live-search])").data('live-search', 'true')  # look for all select that do not have a data-live-search configuration already set
+    $('select.form-control').selectpicker().removeClass('form-control')           # using the default bootstrap 'form-control' class to have a nice fallback if somehow JS fails to load
+    $('.bootstrap-select.form-control').removeClass('form-control')               # remove the lingering form-control that got brought over during the selectpicker() initialization
 
