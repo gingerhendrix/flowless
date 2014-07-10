@@ -1,10 +1,22 @@
 .panel.panel-default.nested-fields
-  .panel-heading
-    %h3.panel-title= f.object.class.name
-  .panel-body
-    = f.hidden_field :_type, value: f.object.class.name
-    = f.hidden_field :index, value: f.index
-    = render partial: "/flows/#{f.object.class.name.underscore}", object: f
 
-    %p
-      = link_to_remove_association "Remove field", f
+  .panel-heading
+    %h3.panel-title.form-inline
+      %span.glyphicon.glyphicon-align-justify
+      %a{ href: "##{f.object.id}", style: 'padding: 0 20px;', data: { toggle: 'collapse' } }
+        = f.object.class.name.split('::').last.titlecase.gsub('Type', 'Field') + ':'
+      = f.input :name, wrapper: :inline_form, placeholder: 'Nom du champ'
+
+      = link_to_remove_association f, class: 'close', data: { confirm: 'T\'es sur ?' } do
+        %span{ aria: { hidden: 'true' } } &times;
+        %span{ class: 'sr-only' }= 'Close'
+
+  .panel-collapse.collapse{ id: f.object.id }
+    .panel-body
+      = f.hidden_field :_type, value: f.object.class.name
+      = f.hidden_field :index, value: f.index
+
+      = render 'flows/' + f.object.class.name.underscore, f: f
+
+      %p
+        = link_to_remove_association "Remove field", f

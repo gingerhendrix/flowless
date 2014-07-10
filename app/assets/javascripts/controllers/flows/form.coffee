@@ -7,4 +7,11 @@ class App.Controllers.Flows.Form extends Darwin.Controller
   }
 
   new_field_action_clicked: ($element, $event)->
-    $('#' + @view.get('field_type_dropdown').val()).click()
+    selected_field_type = @view.get('field_type_dropdown').val()
+    if selected_field_type
+      $('#' + selected_field_type).click()
+    else
+      # @view.get('generated_dropdown').trigger('click.bs.dropdown')
+      # $('button[data-id=field_type_list]').trigger('click.bs.dropdown')
+      #@view.get('field_type_dropdown').trigger('click')
+      @view.get('generated_dropdown').trigger('click.bs.dropdown')

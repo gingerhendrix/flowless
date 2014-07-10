@@ -1,10 +1,7 @@
 Flowless::Application.routes.draw do
 
-  resources :collections do
-    get 'page/:page', :action => :index, :on => :collection
-  end
-
   resources :flows do
+    resources :items
   end
 
   authenticated :user do

@@ -16,8 +16,6 @@
       - if current_user.has_role? :admin
         %li= link_to 'Admin', users_path
 
-      %li= link_to 'Collections', collections_path
-
       %li= link_to 'Flows', flows_path
 
 
@@ -27,8 +25,4 @@
       %li= link_to "Sign in with Twitter", user_omniauth_authorize_path(:twitter)
       %li= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
 
-    %li= link_to "Toto", class: 'btn btn-default navbar-bt'
-
-  = button_tag class: 'btn btn-default navbar-btn', type: 'button', data: { toggle: 'modal', target: '#new_flow' } do
-    %span.glyphicon.glyphicon-plus
-    = 'New Flow'
+  = render partial: 'layouts/new_item'

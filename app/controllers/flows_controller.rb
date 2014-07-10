@@ -13,9 +13,6 @@ class FlowsController < ApplicationController
   # GET /flows/new
   def new
     @flow = Flow.new
-    #@flow.field_types.build({ index: 0 }, FieldType::EmailType)
-    #@flow.field_types.build({ index: 1 }, FieldType::InputType)
-    #@flow.field_types.build({ index: 2 }, FieldType::TextareaType)
   end
 
   # GET /flows/1/edit

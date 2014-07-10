@@ -1,9 +1,8 @@
-= email_type.input :name
-= email_type.input :label
-= email_type.input :placeholder
-= email_type.input :help_info,       as: :text
-= email_type.input :default_value
-= email_type.input :blocked_keywords
-= email_type.input :optional,        as: :boolean, wrapper: :vertical_boolean
-= email_type.input :uniq,            as: :boolean, wrapper: :vertical_boolean
-= email_type.input :multiple_emails, as: :boolean, wrapper: :vertical_boolean
+= f.input :label
+= f.input :placeholder
+= f.input :help_info,       as: :text
+= f.input :default_value
+= f.input :blocked_keywords
+= f.input :optional,        as: :boolean, wrapper: :vertical_boolean
+= f.input :uniq,            as: :boolean, wrapper: :vertical_boolean
+= f.input :multiple_emails, as: :boolean, wrapper: :vertical_boolean

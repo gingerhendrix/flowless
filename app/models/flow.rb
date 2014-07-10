@@ -21,6 +21,8 @@ class Flow
 
   field :help_info, type: String # information destined to the final user
 
+  scope :available_to, ->(user) { where(:user_id => user.id) }
+
   def valid_statuses
     steps.map &:name
   end
