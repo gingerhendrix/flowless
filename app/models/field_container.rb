@@ -8,7 +8,8 @@ class FieldContainer
 
   embedded_in :item, class_name: 'Item', inverse_of: 'field_containers'
 
-  embeds_many :field_values, class_name: 'FieldValue', inverse_of: 'field_container'
+  embeds_many :field_values, class_name: 'FieldValue', inverse_of: 'field_container', cascade_callbacks: true#, after_add: :set_field_values_current_flag
+  accepts_nested_attributes_for :field_values
   alias :values :field_values
 
   field :field_type_id, type: BSON::ObjectId
@@ -74,4 +75,9 @@ class FieldContainer
       field_values.send "#{method}#{bang}", options, field_type_to_value.constantize
     end
   end
+
+  # TOTEST # Set the newly added field_values's current flag to true and remove it from the previous one
+  # def set_field_values_current_flag(new_field_value)
+  #   #binding.pry
+  # end
 end

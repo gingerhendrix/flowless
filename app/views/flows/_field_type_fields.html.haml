@@ -13,7 +13,7 @@
 
   .panel-collapse.collapse{ id: f.object.id }
     .panel-body
-      = f.hidden_field :_type, value: f.object.class.name
+      = f.hidden_field :_type#, value: f.object.class.name
       = f.hidden_field :index, value: f.index
 
       = render 'flows/' + f.object.class.name.underscore, f: f

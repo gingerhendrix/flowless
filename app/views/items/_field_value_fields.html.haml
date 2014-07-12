@@ -1,0 +1,8 @@
+.panel.panel-default.nested-fields
+
+  .panel-heading
+    %h3.panel-title= f.object.field_type.name.capitalize
+
+  .panel-body
+    = f.hidden_field :_type#, value: f.object.class.name
+    = render 'items/' + f.object.class.name.underscore, f: f

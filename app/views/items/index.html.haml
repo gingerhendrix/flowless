@@ -1,0 +1,23 @@
+.page-header
+  = link_to new_flow_item_path(@flow), :class => 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New Item
+  %h2 Listing items
+
+.table-responsive
+  %table.table.table-hover.table-condensed
+    %thead
+      %tr
+        - @flow.field_types.each do |field_type|
+          %th= field_type.name.capitalize
+        %th Actions
+
+    %tbody
+      - @items.each do |item|
+        %tr
+          - @flow.field_types.each do |field_type|
+            %td= item.current_field_values_with_field_type_id(field_type.id).first.try(:value)
+          %td
+            = link_to 'Show', flow_item_path(@flow, item), :class => 'btn btn-xs btn-default'
+            = link_to 'Edit', edit_flow_item_path(@flow, item), :class => 'btn btn-xs btn-primary'
+            = link_to 'Destroy', [@flow, item], :data => { confirm: 'Are you sure?' }, :method => :delete, :class => 'btn btn-xs btn-danger'

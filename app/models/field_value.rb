@@ -2,6 +2,8 @@ class FieldValue
   include Mongoid::Document
   include Mongoid::Timestamps
 
+  before_create :switch_current_flag_to_new_field_value
+
   delegate :field_type_to_value, :field_type, :field_type_id, :item, :flow, to: :field_container
   delegate :default_value, :uniq?, :optional?, to: :field_type
 
@@ -16,10 +18,6 @@ class FieldValue
 
   # Verifying that the FieldValue matches with the associated FieldType
   validates :_type, inclusion: { in: ->(v) { [ v.field_type_to_value ] } }
-  #proc { |my_instance| raise my_instance.some_stuf } }
-  #validates :_type, acceptance: { accept: ->(v) { raise v.field_type_to_value } }
-  #validates :_type, acceptance: { accept: lambda { |v| v.field_type_to_value } }
-  # TOQUESTION why is the acceptance not working ? cf http://stackoverflow.com/questions/24500069/mongoid-validations-using-acceptance-with-a-proc-or-lambda-is-not-working-b
 
   scope :versionned, ->        { desc(:_id) }
   scope :current,    ->        { where(current: true) }
@@ -42,6 +40,16 @@ class FieldValue
   def value_special_uniqueness_validation
     if value && current_values_of_same_field_type_from_other_items_in_the_same_flow.include?(value)
       errors.add :value, I18n.t('errors.messages.taken')
+    end
+  end
+
+  #TOTEST
+  def switch_current_flag_to_new_field_value
+    unless current
+      field_container.current_values.each do |old_field_values|
+        old_field_values.current = false
+      end
+      self.current = true
     end
   end
 

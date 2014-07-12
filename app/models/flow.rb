@@ -3,11 +3,13 @@ class Flow
   include Mongoid::Timestamps
   include Followable
 
-  embeds_many :field_types, class_name: 'FieldType',  inverse_of: 'flow'
+  before_validation :set_incremental_index_on_field_types
+
+  embeds_many :field_types, class_name: 'FieldType',  inverse_of: 'flow', cascade_callbacks: true
   accepts_nested_attributes_for :field_types, allow_destroy: true, :reject_if => :all_blank#, reject_if: ->(attributes) { attributes['xx'].blank? }
 
-  embeds_many :steps,       class_name: 'Step',       inverse_of: 'flow'
-  embeds_many :transitions, class_name: 'Transition', inverse_of: 'flow'
+  embeds_many :steps,       class_name: 'Step',       inverse_of: 'flow', cascade_callbacks: true
+  embeds_many :transitions, class_name: 'Transition', inverse_of: 'flow', cascade_callbacks: true
 
   has_many    :items, class_name: 'Item', inverse_of: 'flow',  validate: false
 
@@ -25,5 +27,12 @@ class Flow
 
   def valid_statuses
     steps.map &:name
+  end
+
+  #TOTEST # in order to force a uniq set of ids # should not be necessary if the view was doing its jobs upon inserting fields_for #TODO JS fix
+  def set_incremental_index_on_field_types
+    field_types.each_with_index do |field_type, index|
+      field_type.index = index
+    end
   end
 end

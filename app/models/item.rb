@@ -6,13 +6,17 @@ class Item
   include Followable
   include Eventable
 
-  delegate :valid_statuses, to: :flow
+  # TEMP # BUGFIX workaround # debug method to avoid the double save issue: see https://github.com/mongoid/mongoid/issues/3392
+  before_create :prevent_double_save_bug
 
-  embeds_many :field_containers, class_name: 'FieldContainer', inverse_of: 'item'
-  alias :containers :field_containers
+  delegate :valid_statuses, :field_types, to: :flow
 
-  embeds_many :reminders,        class_name: 'Reminder',       inverse_of: 'item'
-  embeds_many :comments,         class_name: 'Comment',        inverse_of: 'item'
+  embeds_many :field_containers, class_name: 'FieldContainer', inverse_of: 'item', cascade_callbacks: true
+  accepts_nested_attributes_for :field_containers
+  #alias :containers :field_containers
+
+  embeds_many :reminders,        class_name: 'Reminder',       inverse_of: 'item', cascade_callbacks: true
+  embeds_many :comments,         class_name: 'Comment',        inverse_of: 'item', cascade_callbacks: true
 
   belongs_to :user, class_name: 'User', inverse_of: 'items', validate: false, index: true
   belongs_to :flow, class_name: 'Flow', inverse_of: 'items', validate: false, index: true
@@ -27,7 +31,7 @@ class Item
   field :status, type: String # TODO perform validation on the status with the steps associated to the Flow
 
   # verify if the status is among the available steps name
-  validates :status, inclusion: { in: proc { |i| i.valid_statuses } }
+  # TODO re-enable: validates :status, inclusion: { in: proc { |i| i.valid_statuses } }
 
   def step
     flow.steps.with_status(status).first
@@ -76,6 +80,28 @@ class Item
     else
       raise Exceptions::InapplicableTransition, "Tried to apply Transition '#{transition.id}' from Flow '#{transition.flow.id}' on Item '#{id}'"
     end
+  end
+
+  #TOTEST # should field containers be created as soon as the item is created and always be present !?
+  def build_field_containers # based on the field_types
+    # listing all the field_types ids and removing all the existing containers field_type ids
+    (field_types.map(&:id) - field_containers.map(&:field_type_id)).each do |field_type_id|
+      field_containers.build(field_type_id: field_type_id)
+    end
+    field_containers
+  end
+
+  #TOTEST # create a new set of field_values for all possible field values (refered too as a field layer)
+  # and pre-load it with the current value
+  def build_field_values
+    field_containers.each do |field_container|
+      field_container.build_value field_container.current_value
+    end
+  end
+
+  # TEMP # BUGFIX workaround # debug method to avoid the double save issue: see https://github.com/mongoid/mongoid/issues/3392
+  def prevent_double_save_bug
+    false if self.persisted?
   end
 
   private

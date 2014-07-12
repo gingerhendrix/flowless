@@ -24,4 +24,6 @@ class FieldType
 
   field     :help_info, type: String  # allow a help description to be inserted on the field form
   ##
+
+  default_scope -> { order_by([[:index, :asc], [:_id, :asc]]) }
 end

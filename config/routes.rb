@@ -5,7 +5,7 @@ Flowless::Application.routes.draw do
   end
 
   authenticated :user do
-    root to: 'home#index', as: :authenticated_root
+    root to: 'flows#index', as: :authenticated_root
   end
 
   unauthenticated do

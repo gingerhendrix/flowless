@@ -1,0 +1,7 @@
+.page-header
+  = link_to flow_items_path(@flow), :class => 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  %h1 New item
+
+= render 'form'

@@ -1,0 +1,13 @@
+= simple_form_for [@flow, @item] do |f|
+  = f.error_notification
+
+  = f.hidden_field :flow_id
+  = f.hidden_field :status
+
+  .form-inputs
+    = f.simple_fields_for :field_containers do |field_container|
+      = field_container.hidden_field :field_type_id#, value: field_value.object.field_type_id
+      = render 'field_container_fields', f: field_container
+
+  .form-actions
+    = f.button :submit

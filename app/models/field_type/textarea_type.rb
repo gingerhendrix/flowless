@@ -21,7 +21,7 @@ class FieldType
     field     :resizable,  type: Boolean, default: false   # wether or not the text area should be resizable by the user filling in the form
     validates :resizable,  presence: true  # with mongoid 4, a string "true" will automatically be converted to true
 
-    field     :height, type: Integer, default: 10 # size of the textarea in lines (might need to do conversion from pixels)
+    field     :height, type: Integer, default: 2 # size of the textarea in lines (might need to do conversion from pixels)
     validates :height, numericality: { only_integer: true, greater_than_or_equal_to: 2 } # arbitraty value, 2 lines minimum of text
     validates :height, presence: true
 

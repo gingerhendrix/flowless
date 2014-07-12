@@ -8,6 +8,7 @@ class FlowsController < ApplicationController
 
   # GET /flows/1
   def show
+    @items = @flow.items
   end
 
   # GET /flows/new

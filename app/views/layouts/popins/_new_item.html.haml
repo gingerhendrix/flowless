@@ -1,0 +1,12 @@
+#new_item.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      / = simple_form_for @flow, html: { class: 'form-inline' }  do |f|
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} &times;
+        %h4#myModalLabel.modal-title Create a new item
+      .modal-body
+
+      .modal-footer
+        / = f.button :button, 'Cancel', class: 'btn-default', type: 'button', data: { dismiss: 'modal' }
+        / = f.button :button, 'Create', class: 'btn-primary', type: 'button'
