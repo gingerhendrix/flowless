@@ -180,8 +180,8 @@ describe FieldValue, :type => :model do
 
     let!(:item2)            { FactoryGirl.create :item, flow: flow, status: status  }
     let!(:field_container2) { FactoryGirl.create :field_container, item: item2, field_type_id: field_type.id }
-    let!(:item2_value1)     { FactoryGirl.create :input_value, value: '3', _type: "FieldValue::InputValue", field_container: field_container2, current: false }
-    let!(:item2_value2)     { FactoryGirl.create :input_value, value: '4', _type: "FieldValue::InputValue", field_container: field_container2, current: true }
+    let!(:item2_value1)     { FactoryGirl.create :input_value, value: '3', _type: "FieldValue::InputValue", field_container: field_container2, current: true }
+    let!(:item2_value2)     { FactoryGirl.create :input_value, value: '4', _type: "FieldValue::InputValue", field_container: field_container2, current: false }
 
     let!(:item3)            { FactoryGirl.create :item, flow: flow, status: status  }
     let!(:field_container3) { FactoryGirl.create :field_container, item: item3, field_type_id: field_type.id }
@@ -190,8 +190,7 @@ describe FieldValue, :type => :model do
 
     describe 'current_values_of_same_field_type_from_other_items_in_the_same_flow' do
       it 'should return all the current values execpt the one from the item making the query' do
-        expect(item1_value1.send :current_values_of_same_field_type_from_other_items_in_the_same_flow).to eq ['4', '5']
-        # getting 4 and 5, because item2 has 2 current values, which is "illegal", but in case it happens we want the most recent one.
+        expect(item1_value1.send :current_values_of_same_field_type_from_other_items_in_the_same_flow).to eq ['3', '5']
       end
     end
   end
