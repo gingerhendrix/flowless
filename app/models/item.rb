@@ -82,10 +82,15 @@ class Item
     end
   end
 
+  # listing all the field_types ids and removing all the existing containers field_type ids to find all `missing` field_containers
+  # from the list of all expected containers from the field types contained in the flow
+  def missing_field_container_ids
+    field_types.map(&:id) - field_containers.map(&:field_type_id)
+  end
+
   #TOTEST # should field containers be created as soon as the item is created and always be present !?
   def build_field_containers # based on the field_types
-    # listing all the field_types ids and removing all the existing containers field_type ids
-    (field_types.map(&:id) - field_containers.map(&:field_type_id)).each do |field_type_id|
+    missing_field_container_ids.each do |field_type_id|
       field_containers.build(field_type_id: field_type_id)
     end
     field_containers
