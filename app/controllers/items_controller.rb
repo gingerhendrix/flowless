@@ -15,7 +15,7 @@ class ItemsController < ApplicationController
   # GET /items/new
   def new
     @item = @flow.items.new
-    @item.build_field_containers
+    @item.build_missing_field_containers
     @item.build_field_values
   end
 

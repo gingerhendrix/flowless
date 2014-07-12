@@ -89,7 +89,7 @@ class Item
   end
 
   #TOTEST # should field containers be created as soon as the item is created and always be present !?
-  def build_field_containers # based on the field_types
+  def build_missing_field_containers # based on the field_types
     missing_field_container_ids.each do |field_type_id|
       field_containers.build(field_type_id: field_type_id)
     end
