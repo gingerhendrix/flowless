@@ -98,11 +98,11 @@ describe FieldContainer, :type => :model do
       let!(:field_value_3) { FactoryGirl.build :input_value, value: '3', _type: "FieldValue::InputValue", field_container: field_container, current: false }
 
       it 'should return the first current value if no parameters are passed' do
-        expect(field_container.current_field_value).to be field_value_1
+        expect(field_container.current_field_value).to be field_value_2
       end
 
       it 'should ignore wrong options' do
-        expect(field_container.current_field_value({ foo: :bar })).to be field_value_1
+        expect(field_container.current_field_value({ foo: :bar })).to be field_value_2
       end
 
       it 'should options with scope and its name when no params are passed' do

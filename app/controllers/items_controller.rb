@@ -16,11 +16,13 @@ class ItemsController < ApplicationController
   def new
     @item = @flow.items.new
     @item.build_missing_field_containers
-    @item.build_field_values
+    @item.build_field_value_layer
   end
 
   # GET /items/1/edit
   def edit
+    @item.build_missing_field_containers
+    @item.build_field_value_layer
   end
 
   # POST /items
@@ -63,8 +65,8 @@ class ItemsController < ApplicationController
     def item_params
       params.require(:item).permit(
         field_containers_attributes: [
-          :field_type_id, field_values_attributes: [
-            :_type, :id, :value #, :current
+          :id, :field_type_id, field_values_attributes: [
+            :_type, :id, :value, :current_value
           ]
         ]
       ).merge(user_id: current_user.id)

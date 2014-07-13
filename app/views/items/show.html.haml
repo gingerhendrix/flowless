@@ -8,3 +8,33 @@
   %h1 Show item
 
 %dl.dl-horizontal
+
+  - @item.field_containers.each do |field_container|
+
+    .panel.panel-default
+      .panel-heading
+        %h3.panel-title
+          = field_container.field_type.name + ':'
+          %a{ href: "##{field_container.id}", style: 'padding: 0 20px; font-weight: bold;', data: { toggle: 'collapse' } }
+            = field_container.current_value
+
+      .panel-collapse.collapse{ id: field_container.id }
+        .panel-body
+
+          .table-responsive
+            %table.table.table-hover.table-condensed
+              %thead
+                %tr
+                  %th
+                  %th= field_container.field_type.name
+                  %th= 'Created at'
+              %body
+                - field_container.field_values.each_with_index do |field_value, index|
+                  %tr
+                    %td{ style: 'font-style: italic;'}
+                      = index == 0 ? '(current value)' : ''
+                    %td
+                      = field_value.value
+                    %td
+                      = l field_value.created_at, format: :long
+

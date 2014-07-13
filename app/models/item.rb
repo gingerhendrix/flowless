@@ -98,7 +98,7 @@ class Item
 
   #TOTEST # create a new set of field_values for all possible field values (refered too as a field layer)
   # and pre-load it with the current value
-  def build_field_values
+  def build_field_value_layer
     field_containers.each do |field_container|
       field_container.build_value field_container.current_value
     end

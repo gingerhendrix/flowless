@@ -36,14 +36,14 @@ describe FieldValue::EmailValue, :type => :model do
       end
 
       it 'should raise an error if the email value contains a blocked keyword' do
-        expect(email_value).to receive(:blocked_keywords).and_return [ 'blocked' ]
+        expect(email_value).to receive(:blocked_keywords).and_return [ 'blocked' ].join(', ')
         email_value.value = 'someone@blocked.com'
         expect(email_value.forbidden_keyword_validation).to_not eq false
         expect(email_value.errors[:value]).to_not be_empty
       end
 
       it 'should not raise an error if the email value does not contain a blocked keyword' do
-        expect(email_value).to receive(:blocked_keywords).and_return [ 'blocked' ]
+        expect(email_value).to receive(:blocked_keywords).and_return [ 'blocked' ].join(', ')
         email_value.value = 'someone@ok.com'
         expect(email_value.forbidden_keyword_validation).to_not eq false
         expect(email_value.errors[:value]).to be_empty

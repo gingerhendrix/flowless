@@ -12,6 +12,11 @@ class FieldValue
   embedded_in :field_container, class_name: 'FieldContainer', inverse_of: 'field_values'
   alias :container :field_container
 
+  #TOTEST
+  default_scope -> { order_by([[:current, :desc], [:_id, :desc]]) }
+
+  attr_accessor :current_value
+
   field :_type # needs to be hard coded to be able to perform the validation to prevent instanciating an object from the base class
 
   field :current, type: Boolean, default: false # need to implement a logic to identify which value is the current one (considering the versioning abilities) this is necessary to perform queries
@@ -51,6 +56,10 @@ class FieldValue
       end
       self.current = true
     end
+  end
+
+  def self.unpersisted
+    field_values.reject{ |field_value| field_value.persisted? }
   end
 
   private

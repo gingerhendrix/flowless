@@ -9,7 +9,8 @@ class FieldContainer
   embedded_in :item, class_name: 'Item', inverse_of: 'field_containers'
 
   embeds_many :field_values, class_name: 'FieldValue', inverse_of: 'field_container', cascade_callbacks: true#, after_add: :set_field_values_current_flag
-  accepts_nested_attributes_for :field_values
+  #TO TEST #TEMP #TOIMPROVE the rejection bit !?!
+  accepts_nested_attributes_for :field_values, reject_if: ->(attributes) { attributes['value'] == attributes['current_value'] }
   alias :values :field_values
 
   field :field_type_id, type: BSON::ObjectId
@@ -22,6 +23,19 @@ class FieldContainer
 
   def current_values
     field_values.current
+  end
+
+  #TEMP #TOTEST
+  # get all field_values that did not get persisted yet, but if none are available
+  # because for instance the value got rejected because if was the same as the current value
+  # then we need to rebuild it for the form
+  def non_persisted_field_values
+    values = field_values.reject{ |field_value| field_value.persisted? }
+    if values.empty?
+      [ build_value(current_value) ]
+    else
+      values
+    end
   end
 
   # because we want to be easily able to list all the current field_values of an item with thinking about versionning

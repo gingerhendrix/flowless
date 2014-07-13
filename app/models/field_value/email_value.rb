@@ -14,8 +14,9 @@ class FieldValue
 
     validate :forbidden_keyword_validation, unless: ->{ blocked_keywords.empty? }
 
+    # TOTEST, TODO improve the handling of the value regexp
     def forbidden_keyword_validation
-      errors.add :value, I18n.t('errors.messages.exclusion') if value =~ /(#{blocked_keywords.join('|')})/
+      errors.add :value, I18n.t('errors.messages.exclusion') if value =~ /(#{blocked_keywords.split(',').map(&:strip).join('|')})/
     end
   end
 end

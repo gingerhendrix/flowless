@@ -161,9 +161,9 @@ describe FieldValue, :type => :model do
 
   context 'scopes' do
     describe 'versionned' do
-      it 'should have the proper criteria sort option' do
-        expect(field_container.field_values.versionned.options[:sort]).to eq({ '_id' => -1 })
-      end
+      # it 'should have the proper criteria sort option' do
+      #   expect(field_container.field_values.versionned.options[:sort]).to eq({ '_id' => -1 })
+      # end
     end
   end
 
@@ -175,22 +175,22 @@ describe FieldValue, :type => :model do
 
     let!(:item1)            { FactoryGirl.create :item, flow: flow, status: status }
     let!(:field_container1) { FactoryGirl.create :field_container, item: item1, field_type_id: field_type.id }
-    let!(:item1_value1)     { FactoryGirl.create :input_value, value: '1', _type: "FieldValue::InputValue", field_container: field_container1, current: true }
-    let!(:item1_value2)     { FactoryGirl.create :input_value, value: '2', _type: "FieldValue::InputValue", field_container: field_container1, current: false }
+    let!(:item1_value1)     { FactoryGirl.create :input_value, value: '1', _type: "FieldValue::InputValue", field_container: field_container1, current: false }
+    let!(:item1_value2)     { FactoryGirl.create :input_value, value: '2', _type: "FieldValue::InputValue", field_container: field_container1, current: true }
 
     let!(:item2)            { FactoryGirl.create :item, flow: flow, status: status  }
     let!(:field_container2) { FactoryGirl.create :field_container, item: item2, field_type_id: field_type.id }
-    let!(:item2_value1)     { FactoryGirl.create :input_value, value: '3', _type: "FieldValue::InputValue", field_container: field_container2, current: true }
-    let!(:item2_value2)     { FactoryGirl.create :input_value, value: '4', _type: "FieldValue::InputValue", field_container: field_container2, current: false }
+    let!(:item2_value1)     { FactoryGirl.create :input_value, value: '3', _type: "FieldValue::InputValue", field_container: field_container2, current: false }
+    let!(:item2_value2)     { FactoryGirl.create :input_value, value: '4', _type: "FieldValue::InputValue", field_container: field_container2, current: true }
 
     let!(:item3)            { FactoryGirl.create :item, flow: flow, status: status  }
     let!(:field_container3) { FactoryGirl.create :field_container, item: item3, field_type_id: field_type.id }
-    let!(:item3_value1)     { FactoryGirl.create :input_value, value: '5', _type: "FieldValue::InputValue", field_container: field_container3, current: true }
-    let!(:item3_value2)     { FactoryGirl.create :input_value, value: '6', _type: "FieldValue::InputValue", field_container: field_container3, current: false }
+    let!(:item3_value1)     { FactoryGirl.create :input_value, value: '5', _type: "FieldValue::InputValue", field_container: field_container3, current: false }
+    let!(:item3_value2)     { FactoryGirl.create :input_value, value: '6', _type: "FieldValue::InputValue", field_container: field_container3, current: true }
 
     describe 'current_values_of_same_field_type_from_other_items_in_the_same_flow' do
       it 'should return all the current values execpt the one from the item making the query' do
-        expect(item1_value1.send :current_values_of_same_field_type_from_other_items_in_the_same_flow).to eq ['3', '5']
+        expect(item1_value2.send :current_values_of_same_field_type_from_other_items_in_the_same_flow).to eq ['4', '6']
       end
     end
   end

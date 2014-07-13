@@ -1,2 +1,2 @@
-= f.simple_fields_for :field_values do |field_value|
+= f.simple_fields_for :field_values, f.object.non_persisted_field_values do |field_value|
   = render 'field_value_fields', f: field_value
