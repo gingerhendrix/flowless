@@ -29,8 +29,8 @@ class FieldValue
   scope :with_value, ->(value) { where(value: value) }
 
   ## validation from the associated field_type for all the default options
-  validates :value, presence: true,               unless: ->{ optional? }
-  validate  :value_special_uniqueness_validation, if:     ->{ uniq? }
+  validates :value, presence: true,               on: :create, unless: ->{ optional? }
+  validate  :value_special_uniqueness_validation, on: :create, if:     ->{ uniq? }
 
   # Setting the default value in a after_build callback because at the time of instanciation
   # the object is not yet linked to the parent and therfore the default_value is not accessible

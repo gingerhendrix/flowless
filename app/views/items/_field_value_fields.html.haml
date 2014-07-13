@@ -5,5 +5,5 @@
 
   .panel-body
     = f.hidden_field :_type
-    = f.hidden_field :current_value, value: f.object.value
+    = f.hidden_field :current_value#, value: f.object.value
     = render 'items/' + f.object.class.name.underscore, f: f

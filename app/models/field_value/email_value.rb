@@ -9,10 +9,10 @@ class FieldValue
 
     field     :value, type: String
 
-    validates :value, format: { with: SINGLE_EMAIL_REGEXP },   allow_blank: true, unless: ->{ multiple_emails? } # allowing nil is important in case there are no value provided (when optional)
-    validates :value, format: { with: MULTIPLE_EMAIL_REGEXP }, allow_blank: true, if:     ->{ multiple_emails? } # allowing nil is important in case there are no value provided (when optional)
+    validates :value, format: { with: SINGLE_EMAIL_REGEXP },   allow_blank: true, on: :create, unless: ->{ multiple_emails? } # allowing nil is important in case there are no value provided (when optional)
+    validates :value, format: { with: MULTIPLE_EMAIL_REGEXP }, allow_blank: true, on: :create, if:     ->{ multiple_emails? } # allowing nil is important in case there are no value provided (when optional)
 
-    validate :forbidden_keyword_validation, unless: ->{ blocked_keywords.empty? }
+    validate :forbidden_keyword_validation, on: :create, unless: ->{ blocked_keywords.empty? }
 
     # TOTEST, TODO improve the handling of the value regexp
     def forbidden_keyword_validation

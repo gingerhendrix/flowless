@@ -100,7 +100,7 @@ class Item
   # and pre-load it with the current value
   def build_field_value_layer
     field_containers.each do |field_container|
-      field_container.build_value field_container.current_value
+      field_container.build_value field_container.current_value, { current_value: field_container.current_value }
     end
   end
 

@@ -32,7 +32,12 @@ class FieldContainer
   def non_persisted_field_values
     values = field_values.reject{ |field_value| field_value.persisted? }
     if values.empty?
-      [ build_value(current_value) ]
+      # if there are no `new` value, let's build one
+      # and run validation on it, to make sure that if it's invalid
+      # the forms knows about it
+      value = build_value current_value, { current_value: current_value }
+      value.valid?
+      [ value ]
     else
       values
     end
