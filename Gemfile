@@ -12,7 +12,7 @@ gem 'haml-rails',       '~> 0.5'   # brings Haml support
 gem 'bootstrap-sass',   '~> 3.2'   # adds the bootstrap framework
 gem 'uglifier',         '~> 2.5'   # compressed and uglify JS
 gem 'darwinjs-rails',   '~> 1.2'   # MV object framework on top of jQuery
-gem 'puma',             '~> 2.8'   # webserver
+gem 'puma',             '~> 2.9'   # webserver
 gem 'recurrence',       '~> 1.3'   # handles recurrence to manage events
 gem 'kaminari',         '~> 0.16'  # handles pagination
 gem 'memcachier',       '~> 0.0.2' # handles the caching process
