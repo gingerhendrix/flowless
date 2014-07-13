@@ -200,7 +200,7 @@ GEM
     pry-stack_explorer (0.4.9.1)
       binding_of_caller (>= 0.7)
       pry (>= 0.9.11)
-    puma (2.8.2)
+    puma (2.9.0)
       rack (>= 1.1, < 2.0)
     quiet_assets (1.0.3)
       railties (>= 3.1, < 5.0)
@@ -350,7 +350,7 @@ DEPENDENCIES
   pry
   pry-rails
   pry-stack_explorer
-  puma (~> 2.8)
+  puma (~> 2.9)
   quiet_assets
   rails (~> 4.1)
   rails_12factor
