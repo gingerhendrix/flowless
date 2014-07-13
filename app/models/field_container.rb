@@ -10,7 +10,7 @@ class FieldContainer
 
   embeds_many :field_values, class_name: 'FieldValue', inverse_of: 'field_container', cascade_callbacks: true#, after_add: :set_field_values_current_flag
   #TO TEST #TEMP #TOIMPROVE the rejection bit !?!
-  accepts_nested_attributes_for :field_values, reject_if: ->(attributes) { attributes['value'] == attributes['current_value'] }
+  accepts_nested_attributes_for :field_values, reject_if: ->(attributes) { attributes['value'].blank? ? false : attributes['value'] == attributes['current_value'] }
   alias :values :field_values
 
   field :field_type_id, type: BSON::ObjectId

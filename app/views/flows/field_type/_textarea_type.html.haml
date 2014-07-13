@@ -8,3 +8,5 @@
 = f.input :height,          as: :integer
 = f.input :resizable,       as: :boolean, wrapper: :vertical_boolean
 = f.input :format,          collection: FieldType::TextareaType::FORMATS, prompt: 'Select a format type'
+= f.input :optional,        as: :boolean, wrapper: :vertical_boolean
+= f.input :uniq,            as: :boolean, wrapper: :vertical_boolean

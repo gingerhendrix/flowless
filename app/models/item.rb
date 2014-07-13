@@ -67,6 +67,7 @@ class Item
       field_container.current_field_value(options[:field_value])
     end.compact # to avoid return an array with nil items
   end
+  alias_method :current_values, :current_field_values
   alias_method :values, :current_field_values
 
   # listing all the current values from a particular field_type_id
