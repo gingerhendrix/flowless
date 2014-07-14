@@ -30,6 +30,8 @@ class Item
 
   field :status, type: String # TODO perform validation on the status with the steps associated to the Flow
 
+  field :next, type: Boolean
+
   # verify if the status is among the available steps name
   # TODO re-enable: validates :status, inclusion: { in: proc { |i| i.valid_statuses } }
 

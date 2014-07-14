@@ -26,6 +26,7 @@
 $(->
   Darwin.Loader.run()
   AppInit.bootstrap_select()
+  AppInit.auto_loading_status_on_button()
 )
 
 @AppInit =
@@ -35,3 +36,9 @@ $(->
     $('select.form-control').selectpicker().removeClass('form-control')           # using the default bootstrap 'form-control' class to have a nice fallback if somehow JS fails to load
     $('.bootstrap-select.form-control').removeClass('form-control')               # remove the lingering form-control that got brought over during the selectpicker() initialization
 
+  auto_loading_status_on_button: ->
+    # $("input[data-loading-text], button[data-loading-text]").click ->
+    #   $(this).button "loading"
+
+    $(document).on "click", "button[data-loading-text], input[data-loading-text]", ->
+      $(this).button "loading"

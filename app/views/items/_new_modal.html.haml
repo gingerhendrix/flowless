@@ -13,5 +13,9 @@
       = render 'field_container_fields', f: field_container
 
   .modal-footer
+    %span.pull-left
+      = check_box_tag :creation_mode, 'multiple', @creation_mode == 'multiple'
+      = label_tag :creation_mode, 'create more than one item', style: 'font-weight: normal; font-style: italic;'
+
     = f.button :button, 'Cancel', type: 'button', data: { dismiss: 'modal' }
-    = f.submit 'Create', class: 'btn btn-primary'
+    = f.submit 'Create', class: 'btn btn-primary', 'data-loading-text' => 'Saving...'

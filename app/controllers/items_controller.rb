@@ -34,6 +34,8 @@ class ItemsController < ApplicationController
   def create
     @item = @flow.items.new(item_params)
 
+    @creation_mode = params[:creation_mode] || 'single'
+
     respond_to do |format|
       if @item.save
         format.html { redirect_to [@flow, @item], flash: { success: 'Item was successfully created.' } }
