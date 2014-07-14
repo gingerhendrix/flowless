@@ -13,8 +13,8 @@ class FieldValue
 
     # WARNING this needs to support UTF-8 encoding - should be ok by default on Ruby 2+
     def textarea_value_length_constraints_validation
-      errors.add :value, I18n.t('errors.messages.too_short') if min_char_count && value.size < min_char_count
-      errors.add :value, I18n.t('errors.messages.too_long')  if max_char_count && value.size > max_char_count
+      errors.add :value, I18n.t('errors.messages.too_short', count: value.size) if min_char_count && value.size < min_char_count
+      errors.add :value, I18n.t('errors.messages.too_long',  count: value.size) if max_char_count && value.size > max_char_count
     end
   end
 end
