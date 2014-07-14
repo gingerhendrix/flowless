@@ -2,6 +2,9 @@ class ItemsController < ApplicationController
   before_action :set_flow, only: [:index, :new, :show, :edit, :update, :create, :destroy]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
 
+  # to allow the new action to not render the layout when call as an ajax call
+  before_action ->(controller){ controller.action_has_layout = false if controller.request.xhr? }, only: [:new]
+
   # GET /items
   def index
     redirect_to flow_path(@flow)

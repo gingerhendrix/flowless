@@ -12,6 +12,8 @@
     = csrf_meta_tags
 
   %body{:class => "#{controller_name} #{action_name}"}
+    = render 'layouts/popins/new_item'
+
     .navbar.navbar-inverse.navbar-fixed-top
       .container
         = render 'layouts/navigation'
@@ -19,6 +21,4 @@
       = render 'layouts/flash_messages'
       .row
         = yield
-
-    = render 'layouts/popins/new_item'
 

@@ -13,7 +13,7 @@ class FieldType
     validates :min_char_count, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
 
     field     :max_char_count, type: Integer, default: nil # can set the maximum number of character allowed for the value, nil means no limit
-    validates :max_char_count, numericality: { only_integer: true, greater_than_or_equal_to: ->(input_type){ input_type.minimum_max_char_count_allowed } }, allow_nil: true
+    validates :max_char_count, numericality: { only_integer: true, greater_than_or_equal_to: ->(input_type){ input_type.minimum_max_char_count_allowed } }, allow_nil: true #TODO: fix validation message it gives this for now: {:one=>"is too long (maximum is 1 character)", :other=>"is too long (maximum is %{count} characters)"}
     # max char count must allows be greater or equal than the min char if it is defined, otherwise it must be at least 1 char long to avoid potential conflicts with the "none" optional option.
 
     field     :validation_regexp, type: Regexp # a regexp can be supplied to validate the value of the field

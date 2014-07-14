@@ -9,7 +9,7 @@
   %ul.nav.navbar-nav
 
     - if user_signed_in?
-      / %li= link_to 'Flows', flows_path
+      = render partial: 'layouts/new_item' unless Flow.available_to(current_user).empty?
 
     - else
       %li= link_to 'Login', new_user_session_path
@@ -23,5 +23,3 @@
         %li= link_to 'Admin', users_path
       %li= link_to 'Edit account', edit_user_registration_path
       %li= link_to 'Logout', destroy_user_session_path, :method => 'delete'
-
-    = render partial: 'layouts/new_item' unless Flow.available_to(current_user).empty?
