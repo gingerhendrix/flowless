@@ -39,7 +39,12 @@ class ItemsController < ApplicationController
     respond_to do |format|
       if @item.save
         format.html { redirect_to [@flow, @item], flash: { success: 'Item was successfully created.' } }
-        format.js   { intialize_new_item; flash.now[:success] = 'Item was successfully created.'; render :show }
+        format.js do
+          item_link = view_context.link_to 'item', flow_item_path(@flow, @item), class: 'alert-link'
+          flash.now[:success] = "Your #{item_link} was successfully created."
+          intialize_new_item
+          render :show
+        end
       else
         format.html { render :new }
         format.js   { render :new }
