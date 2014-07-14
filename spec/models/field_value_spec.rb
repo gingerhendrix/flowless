@@ -52,13 +52,13 @@ describe FieldValue, :type => :model do
       end
 
       it 'should trigger the unicity validation if the associated field_type requires it' do
-        field_type.uniq = true
+        field_type.unique = true
         expect(field_value).to receive :value_special_uniqueness_validation
         field_value.valid?
       end
 
       it 'should be invalid to have an empty value if the associated field_type does not have an optional presence' do
-        field_type.uniq = false
+        field_type.unique = false
         expect(field_value).to_not receive :value_special_uniqueness_validation
         field_value.valid?
       end

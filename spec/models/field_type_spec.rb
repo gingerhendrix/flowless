@@ -14,7 +14,7 @@ describe FieldType, :type => :model do
         expect(field_type.valid?).to be_truthy
       end
 
-      [:optional, :uniq].each do |boolean_field|
+      [:optional, :unique].each do |boolean_field|
         {
           true  => ['true', 't', 'TRUE', 'T', 'True', '1', 'Yes', 'Y', 'y', 'yes', 'YES', :true, 1, -1, true],
           false => ['false', 'f', 'FALSE', 'F', 'False', '0', 'No', 'N', 'n', 'no', 'No', :false, 0, 42, -42, false, 'random'],
@@ -31,15 +31,15 @@ describe FieldType, :type => :model do
   end
 
   context 'public methods' do
-    describe 'uniq?' do
-      it 'should be uniq?' do
-        field_type.uniq = true
-        expect(field_type.uniq?).to be_truthy
+    describe 'unique?' do
+      it 'should be unique?' do
+        field_type.unique = true
+        expect(field_type.unique?).to be_truthy
       end
 
-      it 'should not be uniq?' do
-        field_type.uniq = false
-        expect(field_type.uniq?).to be_falsey
+      it 'should not be unique?' do
+        field_type.unique = false
+        expect(field_type.unique?).to be_falsey
       end
     end
   end

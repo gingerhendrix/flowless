@@ -11,13 +11,13 @@ FactoryGirl.define do
       optional false
     end
 
-    trait :uniq do
+    trait :unique do
       uniq true
     end
 
     factory :mandatory_field_type,      traits: [ :mandatory ]
-    factory :uniq_field_type,           traits: [ :uniq ]
+    factory :unique_field_type,           traits: [ :unique ]
     factory :field_type_with_help_info, traits: [ :with_help_info ]
-    factory :full_field_type,           traits: [ :mandatory, :uniq, :with_help_info ]
+    factory :full_field_type,           traits: [ :mandatory, :unique, :with_help_info ]
   end
 end

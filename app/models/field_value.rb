@@ -5,7 +5,7 @@ class FieldValue
   before_create :switch_current_flag_to_new_field_value
 
   delegate :field_type_to_value, :field_type, :field_type_id, :item, :flow, to: :field_container
-  delegate :default_value, :uniq?, :optional?, to: :field_type
+  delegate :default_value, :unique?, :optional?, to: :field_type
 
   VALUES = AppConfig.fields.map{ |field| "FieldValue/#{field}_value".camelcase }
 
@@ -30,7 +30,7 @@ class FieldValue
 
   ## validation from the associated field_type for all the default options
   validates :value, presence: true,               on: :create, unless: ->{ optional? }
-  validate  :value_special_uniqueness_validation, on: :create, if:     ->{ uniq? }
+  validate  :value_special_uniqueness_validation, on: :create, if:     ->{ unique? }
 
   # Setting the default value in a after_build callback because at the time of instanciation
   # the object is not yet linked to the parent and therfore the default_value is not accessible

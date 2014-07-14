@@ -57,7 +57,7 @@ class FlowsController < ApplicationController
       params.require(:flow).permit(
         :name, :help_info, :description, field_types_attributes: [
           :id, :name, :index, :help_info, :label, :placeholder,
-          :optional, :uniq, :multiple_emails, :blocked_keywords,
+          :optional, :unique, :multiple_emails, :blocked_keywords,
           :_destroy, :_type, :default_value, :validation_regexp,
           :min_char_count, :max_char_count, :masked, :height,
           :resizable, :format

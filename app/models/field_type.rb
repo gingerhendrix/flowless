@@ -19,8 +19,8 @@ class FieldType
   field     :optional,  type: Boolean, default: true   # determines wether or not a field is optional
   validates :optional,  presence: true  # with mongoid 4, a string "true" will automatically be converted to true
 
-  field     :uniq,      type: Boolean, default: false  # determines wether or not having the field must contain uniq values #WARNING to ensure real unicity the db most likely will need to be 'block' during create/update of objects
-  validates :uniq,      presence: true
+  field     :unique,      type: Boolean, default: false  # determines wether or not having the field must contain uniq values #WARNING to ensure real unicity the db most likely will need to be 'block' during create/update of objects
+  validates :unique,      presence: true
 
   field     :help_info, type: String  # allow a help description to be inserted on the field form
   ##
