@@ -1,0 +1,9 @@
+- if @creation_mode == 'single'
+  $('#new_item.modal').modal('hide');
+  $('#flash-messages').append("#{ j render 'layouts/flash_messages' }");
+
+$('#new_item .modal-content').html("#{ j render 'new_modal' }");
+
+- if @creation_mode == 'multiple'
+  $('#new_item .modal-body').prepend("#{ j render 'layouts/flash_messages' }");
+  $('#item_field_containers_attributes_0_field_values_attributes_0_value').focus()

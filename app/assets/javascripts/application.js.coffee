@@ -27,9 +27,7 @@ $(->
   Darwin.Loader.run()
   AppInit.bootstrap_select()
   AppInit.auto_loading_status_on_button()
-
-  $('#new_item').on 'shown.bs.modal', ->
-    $('#item_field_containers_attributes_0_field_values_attributes_0_value').focus()
+  AppInit.auto_setting_focus_on_new_item_modal_first_field
 )
 
 @AppInit =
@@ -40,8 +38,9 @@ $(->
     $('.bootstrap-select.form-control').removeClass('form-control')               # remove the lingering form-control that got brought over during the selectpicker() initialization
 
   auto_loading_status_on_button: ->
-    # $("input[data-loading-text], button[data-loading-text]").click ->
-    #   $(this).button "loading"
-
     $(document).on "click", "button[data-loading-text], input[data-loading-text]", ->
       $(this).button "loading"
+
+  auto_setting_focus_on_new_item_modal_first_field: ->
+    $('#new_item').on 'shown.bs.modal', ->
+      $('#item_field_containers_attributes_0_field_values_attributes_0_value').focus() # the first field in any flow should always have this id
