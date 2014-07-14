@@ -17,12 +17,10 @@ class ItemsController < ApplicationController
 
   # GET /items/new
   def new
-    @item = @flow.items.new
-    @item.build_missing_field_containers
-    @item.build_field_value_layer
+    intialize_new_item
 
     if request.xhr?
-      render :new_modal, layout: false && return
+      render partial: 'new_modal', layout: false && return
     end
   end
 
@@ -36,10 +34,14 @@ class ItemsController < ApplicationController
   def create
     @item = @flow.items.new(item_params)
 
-    if @item.save
-      redirect_to [@flow, @item], flash: { success: 'Item was successfully created.' }
-    else
-      render :new
+    respond_to do |format|
+      if @item.save
+        format.html { redirect_to [@flow, @item], flash: { success: 'Item was successfully created.' } }
+        format.js   { intialize_new_item; flash.now[:success] = 'Item was successfully created.'; render :show }
+      else
+        format.html { render :new }
+        format.js   { render :new }
+      end
     end
   end
 
@@ -59,6 +61,12 @@ class ItemsController < ApplicationController
   end
 
   private
+    def intialize_new_item
+      @item = @flow.items.new
+      @item.build_missing_field_containers
+      @item.build_field_value_layer
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_item
       @item = Item.find(params[:id])
