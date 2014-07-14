@@ -27,6 +27,9 @@ $(->
   Darwin.Loader.run()
   AppInit.bootstrap_select()
   AppInit.auto_loading_status_on_button()
+
+  $('#new_item').on 'shown.bs.modal', ->
+    $('#item_field_containers_attributes_0_field_values_attributes_0_value').focus()
 )
 
 @AppInit =
