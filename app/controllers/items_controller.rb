@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
 
   # to allow the new action to not render the layout when call as an ajax call
-  before_action ->(controller){ controller.action_has_layout = false if controller.request.xhr? }, only: [:new]
+  # before_action ->(controller){ controller.action_has_layout = false if controller.request.xhr? }, only: [:new]
 
   # GET /items
   def index
@@ -20,6 +20,10 @@ class ItemsController < ApplicationController
     @item = @flow.items.new
     @item.build_missing_field_containers
     @item.build_field_value_layer
+
+    if request.xhr?
+      render :new_modal, layout: false && return
+    end
   end
 
   # GET /items/1/edit

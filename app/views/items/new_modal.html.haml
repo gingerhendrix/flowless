@@ -1,0 +1,16 @@
+= simple_form_for [@flow, @item] do |f|
+  = f.error_notification
+  = f.hidden_field :status
+
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} &times;
+    %h4#new-item-modal.modal-title= "Create a new item for #{@flow.name} flow"
+
+  .modal-body
+    = f.simple_fields_for :field_containers do |field_container|
+      = field_container.hidden_field :field_type_id
+      = render 'field_container_fields', f: field_container
+
+  .modal-footer
+    = f.button :button, 'Cancel', type: 'button', data: { dismiss: 'modal' }
+    = f.submit 'Create', class: 'btn btn-primary'
