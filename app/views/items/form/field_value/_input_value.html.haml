@@ -1,1 +1,2 @@
-= f.input :value, wrapper: :inline_form
+- field_type = f.object.field_type
+= f.input :value, label: field_type.label, placeholder: field_type.placeholder, input_html: { value: field_type.default_value }, hint: ((field_type.unique? ? 'This value must be unique within the flow. ' : '') + field_type.help_info), wrapper: (field_type.label.blank? ? :inline_form : :vertical_form), required: field_type.required?

@@ -26,4 +26,9 @@ class FieldType
   ##
 
   default_scope -> { order_by([[:index, :asc], [:_id, :asc]]) }
+
+  # TOTEST
+  def required?
+    !optional?
+  end
 end
