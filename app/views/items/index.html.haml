@@ -16,7 +16,8 @@
       - @items.each do |item|
         %tr
           - @flow.field_types.each do |field_type|
-            %td= item.current_field_values_with_field_type_id(field_type.id).first.try(:value)
+            - field_value = item.current_field_values_with_field_type_id(field_type.id).first
+            %td= render 'items/show/' + field_value.class.name.underscore, field_value: field_value
           %td
             = link_to 'Show', flow_item_path(@flow, item), :class => 'btn btn-xs btn-default'
             = link_to 'Edit', edit_flow_item_path(@flow, item), :class => 'btn btn-xs btn-primary'

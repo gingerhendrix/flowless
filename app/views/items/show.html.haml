@@ -10,13 +10,14 @@
 %dl.dl-horizontal
 
   - @item.field_containers.each do |field_container|
+    - current_field_value = field_container.current_field_value
 
     .panel.panel-default
       .panel-heading
         %h3.panel-title
           = field_container.field_type.name + ':'
           %a{ href: "##{field_container.id}", style: 'padding: 0 20px; font-weight: bold;', data: { toggle: 'collapse' } }
-            = field_container.current_value
+            = render 'items/show/' + current_field_value.class.name.underscore, field_value: current_field_value
 
       .panel-collapse.collapse{ id: field_container.id }
         .panel-body
@@ -34,7 +35,7 @@
                     %td{ style: 'font-style: italic;'}
                       = index == 0 ? '(current value)' : ''
                     %td
-                      = field_value.value
+                      = render 'items/show/' + field_value.class.name.underscore, field_value: field_value
                     %td
                       = l field_value.created_at, format: :long
 
