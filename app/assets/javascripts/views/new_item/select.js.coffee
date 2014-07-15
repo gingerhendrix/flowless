@@ -7,7 +7,14 @@ class App.Views.NewItem.Select extends Darwin.View
   }
 
   disableNewItemButton: ->
-    @get('new_item_button').prop('disabled', true)
+    # @get('new_item_button').prop('disabled', true)
+    @get('new_item_button').button('loading')
 
   enableNewItemButton: ->
-    @get('new_item_button').prop('disabled', false)
+    @get('new_item_button').button('reset')
+    # @get('new_item_button').prop('disabled', false)
+
+  deactivateNewItemButton: ->
+    button = @get('new_item_button')
+    button.button('reset')
+    window.setTimeout( ( ->( button.prop('disabled', true) ) ), 0) # Workaround to disables the button correctly, see: https://github.com/twbs/bootstrap/issues/6242

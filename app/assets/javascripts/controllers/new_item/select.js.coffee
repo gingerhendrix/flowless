@@ -26,3 +26,6 @@ class App.Controllers.NewItem.Select extends Darwin.Controller
 
       request.fail (jqXHR, textStatus)->
         view.get('new_item_selector').selectpicker('val', '')
+
+    else
+      @view.deactivateNewItemButton()

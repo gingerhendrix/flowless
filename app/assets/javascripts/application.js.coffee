@@ -44,6 +44,7 @@ $(->
 
   auto_setting_focus_on_new_item_modal_first_field: ->
     $('#new_item').on 'shown.bs.modal', ->
+      $('#add_new_item').button('reset')
       $('#new_item .popover-dismiss').popover()
       $('#item_field_containers_attributes_0_field_values_attributes_0_value').focus() # the first field in any flow should always have this id
 
