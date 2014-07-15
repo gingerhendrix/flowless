@@ -7,12 +7,10 @@ class App.Views.NewItem.Select extends Darwin.View
   }
 
   disableNewItemButton: ->
-    # @get('new_item_button').prop('disabled', true)
     @get('new_item_button').button('loading')
 
   enableNewItemButton: ->
     @get('new_item_button').button('reset')
-    # @get('new_item_button').prop('disabled', false)
 
   deactivateNewItemButton: ->
     button = @get('new_item_button')
