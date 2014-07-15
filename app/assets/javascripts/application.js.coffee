@@ -28,6 +28,7 @@ $(->
   AppInit.bootstrap_select()
   AppInit.auto_loading_status_on_button()
   AppInit.auto_setting_focus_on_new_item_modal_first_field()
+  AppInit.enable_popover()
 )
 
 @AppInit =
@@ -43,4 +44,8 @@ $(->
 
   auto_setting_focus_on_new_item_modal_first_field: ->
     $('#new_item').on 'shown.bs.modal', ->
+      $('#new_item .popover-dismiss').popover()
       $('#item_field_containers_attributes_0_field_values_attributes_0_value').focus() # the first field in any flow should always have this id
+
+  enable_popover: ->
+    $(".popover-dismiss").popover()
