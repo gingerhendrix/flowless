@@ -1,0 +1,3 @@
+%ul
+  - field_value.value.each do |linked_item|
+    %li= link_to linked_item.display_field, flow_item_path(flow_id: linked_item.flow_id, id: linked_item.id)
