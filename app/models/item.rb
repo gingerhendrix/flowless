@@ -27,6 +27,7 @@ class Item
   scope :ready_to_remind,                    ->(now)           { where(:reminders.elem_match => { remind_at.lte => now , complete: false }) }
   scope :with_pending_reminder_for,          ->(user)          { where(:reminders.elem_match => { user_id: user.id, complete: false }) }
   scope :with_current_values_for_field_type, ->(field_type_id) { where(:field_containers.elem_match => { field_type_id: field_type_id, :'field_values.current' => true }) }
+  scope :for_flow,                           ->(flow_id)       { where(flow_id: flow_id) }
 
   field :status, type: String # TODO perform validation on the status with the steps associated to the Flow
 
@@ -110,6 +111,13 @@ class Item
   # TEMP # BUGFIX workaround # debug method to avoid the double save issue: see https://github.com/mongoid/mongoid/issues/3392
   def prevent_double_save_bug
     false if self.persisted?
+  end
+
+  # method that will be used to display the item in the link dropdown
+  # current logic is to display the field with the lower index value
+  # TODO: this should somehow be configurable - WARNING: performance issue ? with hitting the flow for the field_type_id everytime ?
+  def display_field
+    current_field_values_with_field_type_id(field_types.first.id).first.try(:value) || 'no display field available'
   end
 
   private

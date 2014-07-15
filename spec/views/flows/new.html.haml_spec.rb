@@ -1,7 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe "flows/new", :type => :view do
+
+  let(:user) { FactoryGirl.create(:user) }
+
   before(:each) do
+    sign_in user
     assign(:flow, Flow.new())
   end
 

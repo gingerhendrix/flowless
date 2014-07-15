@@ -88,7 +88,7 @@ class ItemsController < ApplicationController
       params.require(:item).permit(
         field_containers_attributes: [
           :id, :field_type_id, field_values_attributes: [
-            :_type, :id, :value, :current_value
+            :_type, :id, :value, :current_value, value_ids: []
           ]
         ]
       ).merge(user_id: current_user.id)

@@ -15,9 +15,9 @@
     .panel.panel-default
       .panel-heading
         %h3.panel-title
-          = field_container.field_type.name + ':'
-          %a{ href: "##{field_container.id}", style: 'padding: 0 20px; font-weight: bold;', data: { toggle: 'collapse' } }
-            = render 'items/show/' + current_field_value.class.name.underscore, field_value: current_field_value
+          %a{ href: "##{field_container.id}", style: 'padding: 0 20px; font-weight: normal;', data: { toggle: 'collapse' } }
+            = field_container.field_type.name + ':'
+          = render 'items/show/' + current_field_value.class.name.underscore, field_value: current_field_value
 
       .panel-collapse.collapse{ id: field_container.id }
         .panel-body

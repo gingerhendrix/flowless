@@ -2,7 +2,10 @@ require 'rails_helper'
 
 RSpec.describe "flows/edit", :type => :view do
 
+  let(:user) { FactoryGirl.create(:user) }
+
   before(:each) do
+    sign_in user
     @flow = assign(:flow, FactoryGirl.create(:flow))
   end
 
